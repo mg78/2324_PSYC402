@@ -29,7 +29,7 @@ website:
     collapse-level: 1
     style: "floating"
     
-    contents: Week11.qmd
+    contents: /*
 
 #     - section: "PSYC214"
 #       contents: PSYC214/*
