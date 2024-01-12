@@ -1,6 +1,6 @@
 ---
 title: 1. Recap of the linear model and practising data-wrangling in R
-subtitle: Written by Margriet Groen (partly adapted from materials developed by the PsyTeachR team a the University of Glasgow)
+subtitle: Written by Margriet Groen (partly adapted from materials developed by the PsyTeachR team at the University of Glasgow)
 order: 2
 ---
 
@@ -85,9 +85,7 @@ Please note that there are often different ways to do the same or similar things
 ### Pre-lab activity 3: Getting ready for the lab class
 #### Remind yourself of how to access and work with the RStudio Server.
 
-* Revisit [**PSYC401**](https://modules.lancaster.ac.uk/course/view.php?id=37245) to remind yourself of how to access the RStudio Server.
-
-* I highly recommend using R Projects to structure your workflow. You could create an R project for each week of the module. Have a look at section [**8 Workflow: projects**](https://r4ds.had.co.nz/workflow-projects.html) of **R for Data Science** by Hadley Wickam and Gareth Grolemund for an introduction.
+* Revisit [**PSYC401**](https://modules.lancaster.ac.uk/course/view.php?id=40622#coursecontentcollapse1) to remind yourself of how to access the RStudio Server.
 
 #### Get your files ready
 Download the [402_week11_forStudents.zip](images/402_week11_forStudents.zip) file and upload it into a new folder in RStudio Server. 
