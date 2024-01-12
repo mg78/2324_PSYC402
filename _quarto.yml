@@ -48,7 +48,7 @@ website:
     left: "Website developed by Matthew Ivory"
     right:       
       - icon: github
-        href: https://github.com/mg78/2324_PSYC40
+        href: https://github.com/mg78/2324_PSYC402
 
 format:
   html:
