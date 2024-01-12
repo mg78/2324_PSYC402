@@ -7,11 +7,11 @@ execute:
   
 website:
   title: "Statistics for Psychologists"
-  favicon: "Images/favicon.png"
+  favicon: "images/favicon.png"
   page-navigation: true
   back-to-top-navigation: true
     
-  repo-url: https://github.com/M1V0/FASS512
+  repo-url: https://github.com/mg78/2324_PSYC402
   repo-actions: [edit, issue]
   
   navbar:
