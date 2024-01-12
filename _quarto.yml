@@ -48,9 +48,7 @@ website:
     left: "Website developed by Matthew Ivory"
     right:       
       - icon: github
-        href: https://github.com/M1V0/FASS512
-      - icon: file-earmark-slides
-        href: https://modules.lancaster.ac.uk/course/view.php?id=41149
+        href: https://github.com/mg78/2324_PSYC40
 
 format:
   html:
