@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./Week11.html" rel="" target="" aria-current="page">
- <span class="menu-text">Week 1</span></a>
+ <span class="menu-text">Week 11</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -311,91 +311,372 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="step-1-background-and-set-up" class="level4">
 <h4 class="anchored" data-anchor-id="step-1-background-and-set-up">Step 1: Background and set up</h4>
-<p>Before you do anything else, when starting a new analysis, it is a good idea to empty the R environment. This prevents objects and variables from previous analyses interfering with the current one.</p>
-<blockquote class="blockquote">
-<p><strong>TASK</strong>: Use the code snippet below to clear the environment. <strong>TIP</strong>: If you hover your mouse over the box that includes the code snippet, a ‘copy to clipboard’ icon will appear in the top right corner of the box. Click that to copy the code. Now you can easily paste it into your script. <img src="images/copy.png" class="img-fluid"></p>
-</blockquote>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Set your working directory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The folder you were asked to download under ‘Pre-lab activity 3: Getting ready for the lab class’ contains the data files we’ll need. Make sure you have set your working directory to this folder by right-clicking on it and selecting ‘Set as working directory’.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Empty the R environment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you do anything else, when starting a new analysis, it is a good idea to empty the R environment. This prevents objects and variables from previous analyses interfering with the current one. Use the code snippet below to clear the environment.</p>
+</div>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())                            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Before we can get started we need to tell R which libraries to use. For this analysis we’ll need broom, car, pwr and tidyverse.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you hover your mouse over the box that includes the code snippet, a ‘copy to clipboard’ icon will appear in the top right corner of the box. Click that to copy the code. Now you can easily paste it into your script.</p>
+</div>
+</div>
+<p>Before we can get started we need to tell R which libraries to use. For this analysis we’ll need <code>broom</code>, <code>car</code>, <code>pwr</code> and <code>tidyverse</code>.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Load the relevant libraries. <strong>HINT</strong>: Use the <code>library()</code> function.</p>
+<p><strong>TASK</strong>: Load the relevant libraries. If you are unsure how to do that, you can look at the ‘Hint’ below for a clue by expanding it. After that, if you are still unsure, you can view the code by expanding the ‘Code’ section below.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>library()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below.</p>
+<pre><code>library(broom)
+library(car)
+library(pwr)
+library(tidyverse)</code></pre>
+</div>
+</div>
+</div>
 <p>In this lab, we are setting out to test whether a linear combination of pitch and dispersion will predict perceived vocal trustworthiness in male voices. We’ll be working with two data files:</p>
 <ul>
 <li>voice_acoustics.csv - shows the VoiceID, the sex of the voice, and the pitch and dispersion values</li>
 <li>voice_ratings.csv - shows the VoiceID and the ratings of each voice by 28 participants on a scale of 1 to 9 where 9 was extremely trustworthy and 1 was extremely untrustworthy.</li>
 </ul>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Read in both files (using the <code>read_csv()</code> function), have a look at the layout of the data and familiarise yourself with it. The ratings data is rather messy and in a different layout to the acoustics but can you tell what is what?</p>
+<p><strong>TASK</strong>: Read in both files, have a look at the layout of the data and familiarise yourself with it. The ratings data is rather messy and in a different layout to the acoustics but can you tell what is what?</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>read_csv()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below.</p>
+<pre><code>acoustics &lt;- read_csv("voice_acoustics.csv")
+ratings &lt;- read_csv("voice_ratings.csv")</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
 <p><strong>QUESTION 1</strong> How are the acoustics data and the ratings data organised (wide or long)? Are both data files ‘tidy’? If you need more info on what that means, have a look <a href="https://r4ds.had.co.nz/tidy-data.html"><strong>here</strong></a>.</p>
+</blockquote>
 </section>
 <section id="step-2-restructuring-the-ratings-data" class="level4">
 <h4 class="anchored" data-anchor-id="step-2-restructuring-the-ratings-data">Step 2: Restructuring the ratings data</h4>
 <p>We are going to need to do some data-wrangling before we do any analysis! Specifically, we need the change the ratings data to the long format.</p>
-<p>Here we’ll use the <code>pivot_longer()</code> function (see <a href="https://tidyr.tidyverse.org/reference/pivot_longer.html"><strong>here</strong></a> or type <code>?pivot_longer</code> in the Console for more info) to restructure the ratings data from wide to long and store the resulting table as ‘ratings_tidy’.</p>
+<p>Here we’ll use the <code>pivot_longer()</code> function (see <a href="https://r4ds.hadley.nz/data-tidy.html"><strong>here</strong></a> or type <code>?pivot_longer</code> in the Console for more info) to restructure the ratings data from wide to long and store the resulting table as ‘ratings_tidy’.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Use the code snippet below to restructure the data.</p>
+<p><strong>TASK</strong>: Use the code snippet below to restructure the data. Have a look at each line of code (and the comments in green) and check that you understand how it works.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>ratings_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ratings,    <span class="co"># the data you want to restructure</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> P1<span class="sc">:</span>P28,     <span class="co"># columns you want to restructure</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"participant"</span>, <span class="co"># variable name that captures whatever is across the columns</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (in this case P1 to P28 for the 28 different participants)</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"rating"</span>) <span class="co"># variable name that captures whatever is in the cells</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (in this case numbers for ratings)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ratings_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ratings,    <span class="co"># the data you want to restructure</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> P1<span class="sc">:</span>P28,     <span class="co"># columns you want to restructure</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"participant"</span>, <span class="co"># variable name that captures whatever is across the columns</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (in this case P1 to P28 for the 28 different participants)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"rating"</span>) <span class="co"># variable name that captures whatever is in the cells</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># (in this case numbers for ratings)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-3-calculate-mean-trustworthiness-rating-for-each-voice" class="level4">
 <h4 class="anchored" data-anchor-id="step-3-calculate-mean-trustworthiness-rating-for-each-voice">Step 3: Calculate mean trustworthiness rating for each voice</h4>
 <p>Now that we have the ratings data into a tidy format, the next step is to calculate the mean rating for each voice. Remember that each voice is identified by the ‘VoiceID’ variable.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Calculate the mean rating for each voice and store the resulting table in a variable named ‘ratings_mean’. <strong>HINT</strong>: Use <code>group_by()</code> and <code>summarise()</code>. Are you using the tidy data? Also, remember that if there are any missing values (NAs) then na.rm = TRUE would help.</p>
+<p><strong>TASK</strong>: Calculate the mean rating for each voice and store the resulting table in a variable named ‘ratings_mean’.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>group_by()</code> and <code>summarise()</code>. Are you using the tidy data? Also, remember that if there are any missing values (NAs) then na.rm = TRUE would help.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>ratings_mean &lt;- ratings_tidy %&gt;% 
+  group_by(VoiceID) %&gt;% 
+  summarise(mean_rating = mean(rating))</code></pre>
+</div>
+</div>
+</div>
 </section>
 <section id="step-4-join-the-data-together" class="level4">
 <h4 class="anchored" data-anchor-id="step-4-join-the-data-together">Step 4: Join the data together</h4>
 <p>Ok, before we get ahead of ourselves, in order to perform the regression analysis we need to combine the data from ‘ratings_mean’ (the mean ratings) with ‘acoustics’ (the pitch and dispersion ratings). Also, as we said, we only want to analyse male voices today.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Join the two tables and keep only the data for the male voices, call the resulting table ‘joined’. <strong>HINT</strong>: Use the <code>inner_join()</code> function (making use of the variable that is common across both tables) to join. See <a href="https://r4ds.had.co.nz/relational-data.html?q=inner#understanding-joins"><strong>here</strong></a> or type <code>?inner_join</code> in the Console for more info. Use the <code>filter()</code> function to only keep male voices. Remember that the Boolean operator for exactly equal is <code>==</code>.</p>
+<p><strong>TASK</strong>: Join the two tables and keep only the data for the male voices, call the resulting table ‘joined’.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>inner_join()</code> function (making use of the variable that is common across both tables) to join. See <a href="https://r4ds.hadley.nz/joins.html"><strong>here</strong></a> or type <code>?inner_join</code> in the Console for more info. Use the <code>filter()</code> function to only keep male voices. Remember that the Boolean operator for exactly equal is <code>==</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>joined &lt;- ratings_mean %&gt;%
+  inner_join(acoustics, "VoiceID") %&gt;% 
+  filter(sex == "M")</code></pre>
+</div>
+</div>
+</div>
 </section>
 <section id="step-5-spreading-the-data" class="level4">
 <h4 class="anchored" data-anchor-id="step-5-spreading-the-data">Step 5: Spreading the data</h4>
-<p>Ok so we are starting to get an understanding of our data and we want to start thinking about the regression. However, the regression would be easier to work with if Pitch and Dispersion were in separate columns. This can be achieved using the <code>pivot_wider()</code> function (see <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html"><strong>here</strong></a> or type <code>?pivot_wider</code> in the Console for more info). This is basically the inverse of <code>pivot_longer()</code>. It increases the number of columns and decreases the number of rows.</p>
+<p>We are starting to get an understanding of our data and we want to start thinking about the regression. However, the regression would be easier to work with if Pitch and Dispersion were in separate columns. This can be achieved using the <code>pivot_wider()</code> function (see <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html"><strong>here</strong></a> or type <code>?pivot_wider</code> in the Console for more info). This is basically the inverse of <code>pivot_longer()</code>. It increases the number of columns and decreases the number of rows.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Use the code snippet below to spread the data.</p>
+<p><strong>TASK</strong>: Use the code snippet below to spread the data. Have a look at each line of code (and the comments in green) and check that you understand how it works.</p>
 </blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>joined_wide <span class="ot">&lt;-</span> joined <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> measures, <span class="co"># name of the categorical column to spread</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> value) <span class="co"># name of the data to spread</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>joined_wide <span class="ot">&lt;-</span> joined <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> measures, <span class="co"># name of the categorical column to spread</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> value) <span class="co"># name of the data to spread</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<blockquote class="blockquote">
 <p><strong>QUESTION 2</strong> Why do we not need to specify within the <code>pivot_wider()</code> function which data to use?</p>
+</blockquote>
 </section>
 <section id="step-6-visualising-the-data" class="level4">
 <h4 class="anchored" data-anchor-id="step-6-visualising-the-data">Step 6: Visualising the data</h4>
 <p>As always, it is a good idea to visualise your data.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Now that we have all the variables in one place, make two scatterplots, one of mean trustworthiness rating with dispersion and one for mean trustworthiness rating and pitch. <strong>HINT</strong>: For this you’ll need the <code>ggplot()</code> function together with <code>geom_point()</code> and <code>geom_smooth()</code>. Make sure to give your axes some sensible labels.</p>
+<p><strong>TASK</strong>: Now that we have all the variables in one place, make two scatterplots, one of mean trustworthiness rating with dispersion and one for mean trustworthiness rating and pitch.</p>
 </blockquote>
-<p><strong>QUESTION 3</strong> According to the scatterplots, how would you decribe the relationships between trustworthiness and dispersion and trustworthiness and pitch in terms of direction and strength? Which one of the two seems stronger?</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>For this you’ll need the <code>ggplot()</code> function together with <code>geom_point()</code> and <code>geom_smooth()</code>. Make sure to give your axes some sensible labels.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Below is a template for the code. Make sure to specify the data frame and the relevant variables.</p>
+<pre><code>ggplot(DATA, aes(x = variable X, y = variable Y)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw() +
+  labs (y = "Label for variable Y")</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>ggplot(joined_wide, aes(x = Dispersion, y = mean_rating)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw() +
+  labs (y = "Mean Trustworthiness Rating")
+
+ggplot(joined_wide, aes(x = Pitch, y = mean_rating)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  theme_bw() +
+  labs (y = "Mean Trustworthiness Rating")</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 3</strong> According to the scatterplots, how would you describe the relationships between trustworthiness and dispersion and trustworthiness and pitch in terms of direction and strength? Which one of the two seems stronger?</p>
+</blockquote>
 </section>
 <section id="step-7-conducting-and-interpreting-simple-regression" class="level4">
 <h4 class="anchored" data-anchor-id="step-7-conducting-and-interpreting-simple-regression">Step 7: Conducting and interpreting simple regression</h4>
-<p>With all the variables in place, we’re ready now to start building two simple linear regression models:</p>
+<p>With all the variables in place and having gained a better understanding of our data by inspecting the scatterplots, we’re ready now to start building two simple linear regression models:</p>
 <ol type="1">
 <li><p>Predicting trustworthiness mean ratings from Pitch</p></li>
 <li><p>Predicting trustworthiness mean ratings from Dispersion</p></li>
 </ol>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Use the <code>lm()</code> function to run the following two regression models and use the <code>summary()</code> function to look at the output of each model. Store the first model in a table called ‘mod_pitch’ and store the second model in ‘mod_disp’. <strong>HINT</strong>: <code>lm(dv ~ iv, data = my_data)</code></p>
+<p><strong>TASK</strong>: Use the <code>lm()</code> function to run the following two regression models and use the <code>summary()</code> function to look at the output of each model. Store the first model in a table called ‘mod_pitch’ and store the second model in ‘mod_disp’.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Below is a template for the code. Make sure to specify the data frame and the relevant variables.</p>
+<pre><code>lm(dv ~ iv, data = my_data)</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>mod_disp &lt;- lm(mean_rating ~ Dispersion, joined_wide)
+mod_disp_sum &lt;- summary(mod_disp)
+
+mod_pitch &lt;- lm(mean_rating ~ Pitch, joined_wide)
+mod_pitch_sum &lt;- summary(mod_pitch)</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
 <p><strong>QUESTION 4</strong> What do you conclude from the output of these models? Which model is significant? Which predictors are significant? How much variance does each model describe?</p>
+</blockquote>
 </section>
 <section id="step-8-conducting-and-interpreting-multiple-regression" class="level4">
 <h4 class="anchored" data-anchor-id="step-8-conducting-and-interpreting-multiple-regression">Step 8: Conducting and interpreting multiple regression</h4>
@@ -403,30 +684,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Look at the code below. Can you follow how the predictors are first centered (_c) and then standardised (_z)?</p>
 <p>Here I do this by hand because I think it makes it clearer, even though there are functions that do this in one step (<code>scale()</code>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>joined_wide <span class="ot">&lt;-</span> <span class="fu">mutate</span>(joined_wide,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Dispersion_c =</span> Dispersion <span class="sc">-</span> <span class="fu">mean</span>(Dispersion),</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Dispersion_z =</span> Dispersion_c <span class="sc">/</span> <span class="fu">sd</span>(Dispersion_c),</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Pitch_c =</span> Pitch <span class="sc">-</span> <span class="fu">mean</span>(Pitch),</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Pitch_z =</span> Pitch_c <span class="sc">/</span> <span class="fu">sd</span>(Pitch_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>joined_wide <span class="ot">&lt;-</span> <span class="fu">mutate</span>(joined_wide,</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Dispersion_c =</span> Dispersion <span class="sc">-</span> <span class="fu">mean</span>(Dispersion),</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Dispersion_z =</span> Dispersion_c <span class="sc">/</span> <span class="fu">sd</span>(Dispersion_c),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Pitch_c =</span> Pitch <span class="sc">-</span> <span class="fu">mean</span>(Pitch),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Pitch_z =</span> Pitch_c <span class="sc">/</span> <span class="fu">sd</span>(Pitch_c))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Now use the centered and standardised data for the multiple regression. Use the <code>lm()</code> function to run a model for predicting trustworthiness mean ratings from Pitch and Dispersion, and store the model in ‘mod_pitchdisp_z’. Use the ‘summary()’ function to look at the output. <strong>HINT</strong>: <code>lm(dv ~ iv1 + iv2, data = my_data)</code></p>
+<p><strong>TASK</strong>: Now use the centered and standardised data for the multiple regression. Use the <code>lm()</code> function to run a model for predicting trustworthiness mean ratings from Pitch and Dispersion, and store the model in ‘mod_pitchdisp_z’. Use the ‘summary()’ function to look at the output.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Below is a template for the code. Make sure to specify the data frame and the relevant variables.</p>
+<pre><code>lm(dv ~ iv1 + iv2, data = my_data)</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>mod_pitchdisp_z &lt;- lm(mean_rating ~ Pitch_z + Dispersion_z, joined_wide)
+mod_pitchdisp_z_sum &lt;- summary(mod_pitchdisp_z)</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
 <p><strong>QUESTION 5</strong> What do you conclude from the output of this model? Is the overall model significant? Which predictors are significant? How much variance does the model describe? Which model would you say is best for predicting ratings of trustworthiness, the Pitch only, the Dispersion only or the Pitch+Dispersion model?</p>
+</blockquote>
 </section>
 <section id="step-9-checking-assumptions" class="level4">
 <h4 class="anchored" data-anchor-id="step-9-checking-assumptions">Step 9: Checking assumptions</h4>
 <p>Now that we’ve established which model best fits the data, let’s check whether it meets the assumptions of linearity, normality and homoscedasticity.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Check the assumptions of linearity, normality and homoscedasticity. <strong>HINT</strong>: <code>crPlots()</code> to check linearity <code>qqPlot()</code> and <code>shapiro.test()</code> to check normality of the residuals <code>residualPlot()</code> and <code>nvcTest()</code> to check homoscedasticity of the residuals</p>
+<p><strong>TASK</strong>: Check the assumptions of linearity, normality and homoscedasticity.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can use the <code>crPlots()</code> and the <code>qqPlot()</code> functions to check linearity. The <code>shapiro.test()</code> can be used to check normality of the residuals and the <code>residualPlot()</code> and <code>nvcTest()</code> functions to check homoscedasticity of the residuals. These plots are from base R rather than using the <code>ggplot()</code> function. See [<strong>here</strong>] (https://r4ds.hadley.nz/base-r#plots) for a brief explanation of base R plots and why you might want to use them.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>crPlots(mod_pitch)
+
+qqPlot(mod_pitch$residuals) 
+shapiro.test(mod_pitch$residuals)
+
+residualPlot(mod_pitch)
+ncvTest(mod_pitch)</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
 <p><strong>QUESTION 6</strong> What do you conclude from the graphs and output? Should we also check for collinearity?</p>
+</blockquote>
 </section>
 <section id="step-10-writing-up-the-results" class="level4">
 <h4 class="anchored" data-anchor-id="step-10-writing-up-the-results">Step 10: Writing up the results</h4>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Write up the results following APA guidelines. <strong>HINT</strong>: <a href="https://owl.purdue.edu/owl/research_and_citation/apa6_style/apa_formatting_and_style_guide/statistics_in_apa.html"><strong>The Purdue writing lab website</strong></a> is helpful for guidance on punctuating statistics. The <a href="https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf"><strong>APA Style 7th Edition Numbers and Statistics Guide</strong></a> is also useful.</p>
+<p><strong>TASK</strong>: Write up the results following APA guidelines.</p>
 </blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The <a href="https://owl.purdue.edu/owl/research_and_citation/apa_style/apa_formatting_and_style_guide/apa_numbers_statistics.html"><strong>Purdue writing lab website</strong></a> is helpful for guidance on punctuating statistics. The <a href="https://apastyle.apa.org/instructional-aids/numbers-statistics-guide.pdf"><strong>APA Style 7th Edition Numbers and Statistics Guide</strong></a> is also useful.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>

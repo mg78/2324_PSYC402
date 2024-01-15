@@ -19,10 +19,10 @@ website:
     left:
       #- text: Home
       #  file: index.qmd
-      - text: Week 1
+      - text: Week 11
         file: Week11.qmd
-      #- text: Week 2
-      #  file: Worksheets/Worksheet_wk2.qmd
+      #- text: Week 12
+      #  file: Week12.qmd
 
   sidebar:
   
