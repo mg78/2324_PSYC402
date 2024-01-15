@@ -88,7 +88,7 @@ Please note that there are often different ways to do the same or similar things
 * Revisit [**PSYC401**](https://modules.lancaster.ac.uk/course/view.php?id=40622#coursecontentcollapse1) to remind yourself of how to access the RStudio Server.
 
 #### Get your files ready
-Download the [402_week11_forStudents.zip](images/402_week11_forStudents.zip) file and upload it into a new folder in RStudio Server. 
+Download the [402_week11_forStudents.zip](data/week11/402_week11_forStudents.zip) file and upload it into a new folder in RStudio Server. 
 
 ## Lab activities
 In this lab, you’ll gain understanding of and practice with:
