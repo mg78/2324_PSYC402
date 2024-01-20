@@ -140,18 +140,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lectures" id="toc-lectures" class="nav-link active" data-scroll-target="#lectures">Lectures</a></li>
-  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a>
+  <li><a href="#sec-wk12-lectures" id="toc-sec-wk12-lectures" class="nav-link active" data-scroll-target="#sec-wk12-lectures">Lectures</a></li>
+  <li><a href="#sec-wk12-reading" id="toc-sec-wk12-reading" class="nav-link" data-scroll-target="#sec-wk12-reading">Reading</a>
   <ul class="collapse">
   <li><a href="#blogpost-by-professor-dorothy-bishop" id="toc-blogpost-by-professor-dorothy-bishop" class="nav-link" data-scroll-target="#blogpost-by-professor-dorothy-bishop">Blogpost by Professor Dorothy Bishop</a></li>
   <li><a href="#winter-2020" id="toc-winter-2020" class="nav-link" data-scroll-target="#winter-2020">Winter (2020)</a></li>
   </ul></li>
-  <li><a href="#pre-lab-activities" id="toc-pre-lab-activities" class="nav-link" data-scroll-target="#pre-lab-activities">Pre-lab activities</a>
+  <li><a href="#sec-wk12-pre-labactivities" id="toc-sec-wk12-pre-labactivities" class="nav-link" data-scroll-target="#sec-wk12-pre-labactivities">Pre-lab activities</a>
   <ul class="collapse">
   <li><a href="#pre-lab-activity-1-data-wrangling-in-r" id="toc-pre-lab-activity-1-data-wrangling-in-r" class="nav-link" data-scroll-target="#pre-lab-activity-1-data-wrangling-in-r">Pre-lab activity 1: Data-wrangling in R</a></li>
   <li><a href="#pre-lab-activity-2-getting-ready-for-the-lab-class" id="toc-pre-lab-activity-2-getting-ready-for-the-lab-class" class="nav-link" data-scroll-target="#pre-lab-activity-2-getting-ready-for-the-lab-class">Pre-lab activity 2: Getting ready for the lab class</a></li>
   </ul></li>
-  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers">Answers</a></li>
+  <li><a href="#sec-wk12-labactivities" id="toc-sec-wk12-labactivities" class="nav-link" data-scroll-target="#sec-wk12-labactivities">Lab activities</a></li>
+  <li><a href="#sec-wk12-answers" id="toc-sec-wk12-answers" class="nav-link" data-scroll-target="#sec-wk12-answers">Answers</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mg78/2324_PSYC402/edit/main/Week12.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/mg78/2324_PSYC402/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
     </div>
@@ -177,8 +178,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>So far, all the predictors in the models we’ve looked at were continuous variables. What if you wanted to know whether a response differed between two or more discrete groups? Hang on, you might say, that sounds like doing an ANOVA. True, you might have used ANOVA to assess whether group means differed in previous stats courses. ANOVAs—to some degree—are just a special type of regression where you have categorical predictors. This week we’ll look at how to model responses as a function of categorical predictors and we’ll combine categorical predictors to model how a predictor might affect the outcome variable differently across two different groups. For example, we might be interested in whether the amount of time adolescents use digital devices (screen-time) predicts their well-being. Additionally, we might want to know whether well-being is different for adolescent boys and girls and whether the relationship between screen-time and well-being differs for these two groups. By fitting a regression model in which we combine a continuous (screen-time) and a categorical (sex) predictor, we can do exactly that. We’ll be working on that in the lab.</p>
-<section id="lectures" class="level2">
-<h2 class="anchored" data-anchor-id="lectures">Lectures</h2>
+<section id="sec-wk12-lectures" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk12-lectures">Lectures</h2>
 <p>The lecture material for this week follows the recommended chapters in Winter (2020) – see under ‘Reading’ below – and is presented in two parts. The videos have captions, in case you find that helpful. You can download the slides and the transcripts by clicking on the links below the videos.</p>
 <ul>
 <li><strong>Categorical predictors (~17 min)</strong></li>
@@ -197,8 +198,8 @@ ul.task-list li input[type="checkbox"] {
 <iframe allow="autoplay; fullscreen" height="282" width="500" src="https://estream.lancaster.ac.uk/Embed.aspx?id=61014&amp;code=ea~HQdqp3JqlWsGjiMcgx6Ge4C2VAI4pa&amp;cc=1" frameborder="0" allowfullscreen=""></iframe>
 <p><a href="data/week12/dataWrangling_dplyrPipes_slides_1pp.pdf">Slides</a> <a href="data/week12/05dwdplyrPipes.txt">Transcript</a></p>
 </section>
-<section id="reading" class="level2">
-<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<section id="sec-wk12-reading" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk12-reading">Reading</h2>
 <section id="blogpost-by-professor-dorothy-bishop" class="level3">
 <h3 class="anchored" data-anchor-id="blogpost-by-professor-dorothy-bishop">Blogpost by Professor Dorothy Bishop</h3>
 <p>In this <a href="https://deevybee.blogspot.com/2017/11/anova-t-tests-and-regression-different.html?m=1"><strong>very short blogpost</strong></a> Professor Dorothy Bishop explains the links between ANOVA and Regression.</p>
@@ -210,8 +211,8 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Chapter 8</strong> explains what interactions are and how to model and interpret them.</p>
 </section>
 </section>
-<section id="pre-lab-activities" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab-activities">Pre-lab activities</h2>
+<section id="sec-wk12-pre-labactivities" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk12-pre-labactivities">Pre-lab activities</h2>
 <p>After having watched the lectures and read the textbook chapters you’ll be in a good position to try these activities. Completing them before you attend your lab session will help you to consolidate your learning and help move through the lab activities more smoothly.</p>
 <section id="pre-lab-activity-1-data-wrangling-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="pre-lab-activity-1-data-wrangling-in-r">Pre-lab activity 1: Data-wrangling in R</h3>
@@ -300,13 +301,20 @@ If you have difficulty uploading files to the server
 </ul>
 </div>
 </div>
-<!-- ## Lab activities -->
-<!-- In this lab, you’ll gain understanding of and practice with: -->
-<!-- * when and why to apply multiple regression to answer questions in psychological science -->
-<!-- * conducting multiple regression in R when combining continuous and categorical predictors -->
-<!-- * interpreting the R output of multiple linear regression (when combining continuous and categorical predictors) -->
-<!-- * reporting results for multiple linear regression (when combining continuous and categorical predictors), following APA guidelines -->
-<!-- ### Lab activity 1: Combining a continuous and a categorical predictor in a resssion model -->
+</section>
+</section>
+</section>
+<section id="sec-wk12-labactivities" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk12-labactivities">Lab activities</h2>
+<p>In this lab, you’ll gain understanding of and practice with:</p>
+<ul>
+<li>when and why to apply multiple regression to answer questions in psychological science</li>
+<li>conducting multiple regression in R when combining continuous and categorical predictors</li>
+<li>interpreting the R output of multiple linear regression (when combining continuous and categorical predictors)</li>
+<li>reporting results for multiple linear regression (when combining continuous and categorical predictors), following APA guidelines</li>
+</ul>
+<p>The lab activity will be added soon.</p>
+<!-- ### Lab activity: Combining a continuous and a categorical predictor in a resssion model -->
 <!-- #### Background: Smartphone screen-time and well-being -->
 <!-- There is currently much debate (and hype) surrounding smartphones and their effects on well-being, especially with regard to children and teenagers. We’ll be looking at data from this recent study of English adolescents: Przybylski, A. & Weinstein, N. (2017). A Large-Scale Test of the Goldilocks Hypothesis. *Psychological Science, 28*, 204–215. -->
 <!-- This was a large-scale study that found support for the “Goldilocks” hypothesis among adolescents: that there is a “just right” amount of screen-time, such that any amount more or less than this amount is associated with lower well-being. This was a huge survey study with data containing responses from over 120,000 participants! Fortunately, the authors made the data from this study openly available, which allows us to dig deeper into their results. And the question we want to expand on in this lab is whether the relationship between screen-time and well-being depends on the partcipant’s (self-reported) sex. In other words, our research question is: **Does screen-time have a bigger impact on boys or girls, or is it the same for both?** -->
@@ -520,10 +528,8 @@ If you have difficulty uploading files to the server
 <!-- #### Step 9: Write up -->
 <!-- **QUESTION 18**: How would you write up the results following APA guidance? You can choose whether you do so for the model using treatment coding or for the model using deviation coding. -->
 </section>
-</section>
-</section>
-<section id="answers" class="level2">
-<h2 class="anchored" data-anchor-id="answers">Answers</h2>
+<section id="sec-wk12-answers" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk12-answers">Answers</h2>
 <p>When you have completed all of the lab content, you may want to check your answers with our completed version of the script for this week. <strong>Remember</strong>, looking at this script (studying/revising it) does not replace the process of working through the lab activities, trying them out for yourself, getting stuck, asking questions, finding solutions, adding your own comments, etc. <strong>Actively engaging</strong> with the material is the way to learn these analysis skills, not by looking at someone else’s completed code…</p>
 <p>The answers to the questions and the script containing the code will be available after the lab session has taken place.</p>
 <!-- You can download the R-script that includes the relevant code here: [402_wk12_labAct1_withAnswers.R](files/week12/402_wk12_labAct1_withAnswers.R). -->
