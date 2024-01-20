@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./Week12.html" rel="next">
 <link href="./images/favicon.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -122,6 +122,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./Week11.html" rel="" target="" aria-current="page">
  <span class="menu-text">Week 11</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./Week12.html" rel="" target="">
+ <span class="menu-text">Week 12</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
@@ -153,6 +157,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./Week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2. Categorical predictors</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">References</span></a>
   </div>
@@ -167,24 +177,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lectures" id="toc-lectures" class="nav-link active" data-scroll-target="#lectures">Lectures</a></li>
-  <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a>
+  <li><a href="#sec-wk11-lectures" id="toc-sec-wk11-lectures" class="nav-link active" data-scroll-target="#sec-wk11-lectures">Lectures</a></li>
+  <li><a href="#sec-wk11-reading" id="toc-sec-wk11-reading" class="nav-link" data-scroll-target="#sec-wk11-reading">Reading</a>
   <ul class="collapse">
   <li><a href="#miller-haden-2013" id="toc-miller-haden-2013" class="nav-link" data-scroll-target="#miller-haden-2013">Miller &amp; Haden (2013)</a></li>
   <li><a href="#winter-2020" id="toc-winter-2020" class="nav-link" data-scroll-target="#winter-2020">Winter (2020)</a></li>
   </ul></li>
-  <li><a href="#pre-lab-activities" id="toc-pre-lab-activities" class="nav-link" data-scroll-target="#pre-lab-activities">Pre-lab activities</a>
+  <li><a href="#sec-wk11-pre-labactvities" id="toc-sec-wk11-pre-labactvities" class="nav-link" data-scroll-target="#sec-wk11-pre-labactvities">Pre-lab activities</a>
   <ul class="collapse">
   <li><a href="#pre-lab-activity-1-visualising-the-regression-line" id="toc-pre-lab-activity-1-visualising-the-regression-line" class="nav-link" data-scroll-target="#pre-lab-activity-1-visualising-the-regression-line">Pre-lab activity 1: Visualising the regression line</a></li>
   <li><a href="#pre-lab-activity-2-data-wrangling-in-r" id="toc-pre-lab-activity-2-data-wrangling-in-r" class="nav-link" data-scroll-target="#pre-lab-activity-2-data-wrangling-in-r">Pre-lab activity 2: Data-wrangling in R</a></li>
   <li><a href="#pre-lab-activity-3-getting-ready-for-the-lab-class" id="toc-pre-lab-activity-3-getting-ready-for-the-lab-class" class="nav-link" data-scroll-target="#pre-lab-activity-3-getting-ready-for-the-lab-class">Pre-lab activity 3: Getting ready for the lab class</a></li>
   </ul></li>
-  <li><a href="#lab-activities" id="toc-lab-activities" class="nav-link" data-scroll-target="#lab-activities">Lab activities</a>
+  <li><a href="#sec-wk11-labactivities" id="toc-sec-wk11-labactivities" class="nav-link" data-scroll-target="#sec-wk11-labactivities">Lab activities</a>
   <ul class="collapse">
   <li><a href="#lab-activity-1-interpreting-and-reporting-results" id="toc-lab-activity-1-interpreting-and-reporting-results" class="nav-link" data-scroll-target="#lab-activity-1-interpreting-and-reporting-results">Lab activity 1: Interpreting and reporting results</a></li>
   <li><a href="#lab-activity-2-conducting-simple-and-multiple-regression" id="toc-lab-activity-2-conducting-simple-and-multiple-regression" class="nav-link" data-scroll-target="#lab-activity-2-conducting-simple-and-multiple-regression">Lab activity 2: Conducting simple and multiple regression</a></li>
   </ul></li>
-  <li><a href="#answers" id="toc-answers" class="nav-link" data-scroll-target="#answers">Answers</a>
+  <li><a href="#sec-wk11-answers" id="toc-sec-wk11-answers" class="nav-link" data-scroll-target="#sec-wk11-answers">Answers</a>
   <ul class="collapse">
   <li><a href="#lab-activity-1-interpreting-and-reporting-results-1" id="toc-lab-activity-1-interpreting-and-reporting-results-1" class="nav-link" data-scroll-target="#lab-activity-1-interpreting-and-reporting-results-1">Lab activity 1: Interpreting and reporting results</a></li>
   <li><a href="#lab-activity-2-conducting-simple-and-multiple-regression-1" id="toc-lab-activity-2-conducting-simple-and-multiple-regression-1" class="nav-link" data-scroll-target="#lab-activity-2-conducting-simple-and-multiple-regression-1">Lab activity 2: Conducting simple and multiple regression</a></li>
@@ -214,8 +224,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>Before we start covering new material, we want to spent some time on recapping the basic concepts of the linear model (correlation, simple regression, multiple regression). You all come from different educational backgrounds and therefore have vastly different knowledge of, and experience with statistics. Therefore, please follow your own judgement as to whether you feel you want to/need to revisit material outlining the theoretical background to and the practical implementation in R for these topics. Below we provide some guidance as to materials that are relevant. <strong>Just to be clear: We don’t expect you to watch and/or read and/or do everything, please have a look at what you feel you need and spend some time with those materials.</strong></p>
-<section id="lectures" class="level2">
-<h2 class="anchored" data-anchor-id="lectures">Lectures</h2>
+<section id="sec-wk11-lectures" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk11-lectures">Lectures</h2>
 <p><strong>The linear model was discussed in weeks 6 to 9 of PSYC401, so that is a good place to start.</strong></p>
 <p>Alternatively, if you don’t feel confident about the material, these recorded lectures might help.</p>
 <ul>
@@ -225,8 +235,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><a href="https://estream.lancaster.ac.uk/View.aspx?id=60912~5f~xjxBbNDjGF"><strong>Centering and standardising (~5 min)</strong></a> Brief explanation of what centering and standardising are.</p></li>
 </ul>
 </section>
-<section id="reading" class="level2">
-<h2 class="anchored" data-anchor-id="reading">Reading</h2>
+<section id="sec-wk11-reading" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk11-reading">Reading</h2>
 <section id="miller-haden-2013" class="level3">
 <h3 class="anchored" data-anchor-id="miller-haden-2013">Miller &amp; Haden (2013)</h3>
 <p><a href="https://drive.google.com/file/d/0B1fyuTuvj3YoaFdUR3FZaXNuNXc/view"><strong>Link</strong></a></p>
@@ -240,8 +250,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Chapter 6</strong> provides an excellent overview of multiple regression and also explains how this is implemented in R.</p>
 </section>
 </section>
-<section id="pre-lab-activities" class="level2">
-<h2 class="anchored" data-anchor-id="pre-lab-activities">Pre-lab activities</h2>
+<section id="sec-wk11-pre-labactvities" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk11-pre-labactvities">Pre-lab activities</h2>
 <p>After having watched the lectures and read the textbook chapters you’ll be in a good position to try these activities. Completing them before you attend your lab session will help you to consolidate your learning and help move through the lab activities more smoothly.</p>
 <section id="pre-lab-activity-1-visualising-the-regression-line" class="level3">
 <h3 class="anchored" data-anchor-id="pre-lab-activity-1-visualising-the-regression-line">Pre-lab activity 1: Visualising the regression line</h3>
@@ -281,8 +291,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 </section>
-<section id="lab-activities" class="level2">
-<h2 class="anchored" data-anchor-id="lab-activities">Lab activities</h2>
+<section id="sec-wk11-labactivities" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk11-labactivities">Lab activities</h2>
 <p>In this lab, you’ll gain understanding of and practice with:</p>
 <ul>
 <li>when and why to apply simple and multiple regression to answer questions in psychological science</li>
@@ -354,7 +364,7 @@ Empty the R environment
 <p>Before you do anything else, when starting a new analysis, it is a good idea to empty the R environment. This prevents objects and variables from previous analyses interfering with the current one. Use the code snippet below to clear the environment.</p>
 </div>
 </div>
-<div class="cell">
+<div class="cell" data-hash="Week11_cache/html/unnamed-chunk-1_4605f90ad4c90c515955351af79396a2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>(<span class="at">list=</span><span class="fu">ls</span>())                            </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -463,7 +473,7 @@ ratings &lt;- read_csv("voice_ratings.csv")</code></pre>
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Use the code snippet below to restructure the data. Have a look at each line of code (and the comments in green) and check that you understand how it works.</p>
 </blockquote>
-<div class="cell">
+<div class="cell" data-hash="Week11_cache/html/unnamed-chunk-2_2a7719045fbcb6730444e410123795fc">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ratings_tidy <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> ratings,    <span class="co"># the data you want to restructure</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> P1<span class="sc">:</span>P28,     <span class="co"># columns you want to restructure</span></span>
@@ -561,7 +571,7 @@ Code
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Use the code snippet below to spread the data. Have a look at each line of code (and the comments in green) and check that you understand how it works.</p>
 </blockquote>
-<div class="cell">
+<div class="cell" data-hash="Week11_cache/html/unnamed-chunk-3_fb50e5d5acaea8ce08c482636104b91f">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>joined_wide <span class="ot">&lt;-</span> joined <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> measures, <span class="co"># name of the categorical column to spread</span></span>
@@ -700,7 +710,7 @@ mod_pitch_sum &lt;- summary(mod_pitch)</code></pre>
 <p>Now let’s look at both predictors in the same model. Before we do this, it is sensible to center and standardise the predictors.</p>
 <p>Look at the code below. Can you follow how the predictors are first centered (_c) and then standardised (_z)?</p>
 <p>Here I do this by hand because I think it makes it clearer, even though there are functions that do this in one step (<code>scale()</code>).</p>
-<div class="cell">
+<div class="cell" data-hash="Week11_cache/html/unnamed-chunk-4_79820376ee14a817edfc6fac41e0b22b">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>joined_wide <span class="ot">&lt;-</span> <span class="fu">mutate</span>(joined_wide,</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Dispersion_c =</span> Dispersion <span class="sc">-</span> <span class="fu">mean</span>(Dispersion),</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">Dispersion_z =</span> Dispersion_c <span class="sc">/</span> <span class="fu">sd</span>(Dispersion_c),</span>
@@ -820,8 +830,8 @@ Hint
 </section>
 </section>
 </section>
-<section id="answers" class="level2">
-<h2 class="anchored" data-anchor-id="answers">Answers</h2>
+<section id="sec-wk11-answers" class="level2">
+<h2 class="anchored" data-anchor-id="sec-wk11-answers">Answers</h2>
 <p>When you have completed all of the lab content, you may want to check your answers with our completed version of the script for this week. <strong>Remember</strong>, looking at this script (studying/revising it) does not replace the process of working through the lab activities, trying them out for yourself, getting stuck, asking questions, finding solutions, adding your own comments, etc. <strong>Actively engaging</strong> with the material is the way to learn these analysis skills, not by looking at someone else’s completed code…</p>
 <!-- The answers to the questions and the script containing the code will be available after lab session has taken place. -->
 <section id="lab-activity-1-interpreting-and-reporting-results-1" class="level3">
@@ -1081,8 +1091,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./Week12.html" class="pagination-link">
+        <span class="nav-page-text">2. Categorical predictors</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
