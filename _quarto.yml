@@ -21,8 +21,8 @@ website:
       #  file: index.qmd
       - text: Week 11
         file: Week11.qmd
-      #- text: Week 12
-      #  file: Week12.qmd
+      - text: Week 12
+        file: Week12.qmd
 
   sidebar:
   
