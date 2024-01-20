@@ -219,8 +219,7 @@ ul.task-list li input[type="checkbox"] {
 <p>It may surprise you to learn that scientists actually spend far more of time cleaning and preparing their data than they spend actually analysing it. This means completing tasks such as cleaning up bad values, changing the structure of tables, merging information stored in separate tables, reducing the data down to a subset of observations, and producing data summaries. Some have estimated that up to 80% of time spent on data analysis involves such data preparation tasks (Dasu &amp; Johnson, 2003)!</p>
 <p>Many people seem to operate under the assumption that the only option for data cleaning is the painstaking and time-consuming cutting and pasting of data within a spreadsheet program like Excel. We have witnessed students and colleagues waste days, weeks, and even months manually transforming their data in Excel, cutting, copying, and pasting data. Fixing up your data by hand is not only a terrible use of your time, but it is error-prone and not reproducible. Additionally, in this age where we can easily collect massive datasets online, you will not be able to organise, clean, and prepare these by hand.</p>
 <p><strong>In short, you will not thrive as a psychologist if you do not learn some key data wrangling skills.</strong> Although every dataset presents unique challenges, there are some systematic principles you should follow that will make your analyses easier, less error-prone, more efficient, and more reproducible.</p>
-<p>The functions you’ll need in lab activity 2 include <code>select()</code>, <code>filter()</code>, <code>mutate()</code>, <code>group_by()</code> and <code>summarise()</code> from the dplyr package.</p>
-<p>You’ve used these functions before, but the following ‘recipes’ summarise what each one does and how to use it.</p>
+<p>Some of the functions you’ll need in this week’s lab activity are listed below. You’ve used these functions before, but the following ‘recipes’ summarise what each one does and how to use it.</p>
 <blockquote class="blockquote">
 <p><strong>TASK</strong> Have a look at each ‘recipe’ and read through it. Try to understand each step.</p>
 </blockquote>
@@ -230,7 +229,7 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Recipes - how to use them
+Recipes - How to use them
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -243,25 +242,32 @@ Recipes - how to use them
 </ol>
 </div>
 </div>
+<p>Data wrangling:</p>
 <ul>
-<li><code>select()</code> - extract variables (columns) - <a href="https://posit.cloud/learn/recipes/transform/TransformA"><strong>recipe</strong></a></li>
-<li><code>filter()</code> - extract observations (rows)- <a href="https://posit.cloud/learn/recipes/transform/TransformL"><strong>recipe</strong></a></li>
+<li><code>filter()</code> - extract observations (rows) - <a href="https://posit.cloud/learn/recipes/transform/TransformL"><strong>recipe</strong></a></li>
 <li><code>mutate()</code> - create a new variable (column) - <a href="https://posit.cloud/learn/recipes/transform/TransformF"><strong>recipe</strong></a></li>
 <li><code>group_by()</code> - organise the observations into groups - <a href="https://posit.cloud/learn/recipes/transform/TransformI"><strong>recipe</strong></a></li>
 <li><code>summarise()</code> - compute summary statistics - <a href="https://posit.cloud/learn/recipes/transform/TransformH"><strong>recipe</strong></a></li>
 </ul>
-<p>The more you practise coding in R, the easier it will become. The RStudio interactive tutorials I mentioned last week are an excellent place to start if you haven’t engaged with those yet.</p>
+<p>Visualisation:</p>
 <ul>
-<li><p><a href="https://rstudio.cloud/learn/primers/1"><strong>The Basics</strong></a> Start here to learn how to inspect, visualize, subset and transform your data, as well as how to run code.</p></li>
-<li><p><a href="https://rstudio.cloud/learn/primers/2"><strong>Work with Data</strong></a> Learn how to extract values form a table, subset tables, calculate summary statistics, and derive new variables.</p></li>
-<li><p><a href="https://rstudio.cloud/learn/primers/3"><strong>Visualize Data</strong></a> Learn how to use ggplot2 to make any type of plot with your data. The tutorials on <a href="https://rstudio.cloud/learn/primers/3.1"><strong>Exploratory Data Analysis</strong></a> and <a href="https://rstudio.cloud/learn/primers/3.5"><strong>Scatterplots</strong></a> are particularly relevant.</p></li>
+<li><code>geom_histogram()</code> - draw a histogram - <a href="https://posit.cloud/learn/recipes/visualize/VisualizeA5"><strong>recipe</strong></a></li>
+<li><code>geom_line()</code> - draw a line chart - <a href="https://posit.cloud/learn/recipes/visualize/VisualizeA6"><strong>recipe</strong></a></li>
 </ul>
-<p>If you feel confident with the material covered in those tutorials the following are useful to try:</p>
-<ul>
-<li><p><a href="https://rstudio.cloud/learn/primers/4.2"><strong>Separating and Uniting Columns</strong></a> Here you will learn to separate a column into multiple columns and to reverse the process by uniting multiple columns into a single column. Then you’ll practise your data wrangling skills on messy real world data.</p></li>
-<li><p><a href="https://rstudio.cloud/learn/primers/4.3"><strong>Join Data Sets</strong></a> Learn how to work with relational data. Here you will learn how to augment data sets with information from related data sets, as well as how to filter one data set against another.</p></li>
-</ul>
+<p>The more you practise coding in R, the easier it will become.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+The many ‘dialects’ of the R programming language
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Please note that there are often different ways to do the same or similar things in R. This means you might encounter slightly different functions or styles of coding in different materials. This is not something to worry about. Just make sure you’re clear on what a bit of code achieves and choose the function/style that you feel most comfortable with.</p>
+</div>
+</div>
 </section>
 <section id="pre-lab-activity-2-getting-ready-for-the-lab-class" class="level3">
 <h3 class="anchored" data-anchor-id="pre-lab-activity-2-getting-ready-for-the-lab-class">Pre-lab activity 2: Getting ready for the lab class</h3>

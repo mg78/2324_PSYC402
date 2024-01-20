@@ -53,10 +53,6 @@ After having watched the lectures and read the textbook chapters you’ll be in 
 
 ### Pre-lab activity 1: Data-wrangling in R
 
-
-
-
-
 Data comes in lots of different formats. One of the most common formats is that of a two-dimensional table (the two dimensions being rows and columns). Usually, each row stands for a separate observation (e.g. a participant), and each column stands for a different variable (e.g. a response, category, or group). A key benefit of tabular data is that it allows you to store different types of data-numerical measurements, alphanumeric labels, categorical descriptors-all in one place.
 
 It may surprise you to learn that scientists actually spend far more of time cleaning and preparing their data than they spend actually analysing it. This means completing tasks such as cleaning up bad values, changing the structure of tables, merging information stored in separate tables, reducing the data down to a subset of observations, and producing data summaries. Some have estimated that up to 80% of time spent on data analysis involves such data preparation tasks (Dasu & Johnson, 2003)!
@@ -65,14 +61,12 @@ Many people seem to operate under the assumption that the only option for data c
 
 **In short, you will not thrive as a psychologist if you do not learn some key data wrangling skills.** Although every dataset presents unique challenges, there are some systematic principles you should follow that will make your analyses easier, less error-prone, more efficient, and more reproducible.
 
-The functions you'll need in lab activity 2 include `select()`, `filter()`, `mutate()`, `group_by()` and `summarise()` from the dplyr package.
-
-You've used these functions before, but the following 'recipes' summarise what each one does and how to use it.
+Some of the functions you'll need in this week's lab activity are listed below. You've used these functions before, but the following 'recipes' summarise what each one does and how to use it.
 
 > **TASK** Have a look at each 'recipe' and read through it. Try to understand each step.
 
 ::: {.callout-tip}
-## Recipes - how to use them
+## Recipes - How to use them
 Each 'recipe' has the same structure.
 
 1. First, it summarises what it is that you want to achieve when using that specific function. *In the case of `select()` it says "You want to extract specific columns from a data frame and return them as a new, smaller data frame."*
@@ -82,30 +76,25 @@ Each 'recipe' has the same structure.
 
 :::
 
+Data wrangling:
 
-* `select()` - extract variables (columns) - [**recipe**](https://posit.cloud/learn/recipes/transform/TransformA)
-* `filter()` - extract observations (rows)- [**recipe**](https://posit.cloud/learn/recipes/transform/TransformL)
+* `filter()` - extract observations (rows) - [**recipe**](https://posit.cloud/learn/recipes/transform/TransformL)
 * `mutate()` - create a new variable (column) - [**recipe**](https://posit.cloud/learn/recipes/transform/TransformF)
 * `group_by()` - organise the observations into groups - [**recipe**](https://posit.cloud/learn/recipes/transform/TransformI)
 * `summarise()` - compute summary statistics - [**recipe**](https://posit.cloud/learn/recipes/transform/TransformH)
 
 
+Visualisation:
 
-The more you practise coding in R, the easier it will become. The RStudio interactive tutorials I mentioned last week are an excellent place to start if you haven't engaged with those yet. 
+* `geom_histogram()` - draw a histogram - [**recipe**](https://posit.cloud/learn/recipes/visualize/VisualizeA5)
+* `geom_line()` - draw a line chart - [**recipe**](https://posit.cloud/learn/recipes/visualize/VisualizeA6)
 
-* [**The Basics**](https://rstudio.cloud/learn/primers/1) Start here to learn how to inspect, visualize, subset and transform your data, as well as how to run code.
+The more you practise coding in R, the easier it will become. 
 
-* [**Work with Data**](https://rstudio.cloud/learn/primers/2) Learn how to extract values form a table, subset tables, calculate summary statistics, and derive new variables.
-
-* [**Visualize Data**](https://rstudio.cloud/learn/primers/3) Learn how to use ggplot2 to make any type of plot with your data. The tutorials on [**Exploratory Data Analysis**](https://rstudio.cloud/learn/primers/3.1) and [**Scatterplots**](https://rstudio.cloud/learn/primers/3.5) are particularly relevant.
-
-If you feel confident with the material covered in those tutorials the following are useful to try:
-
-* [**Separating and Uniting Columns**](https://rstudio.cloud/learn/primers/4.2) Here you will learn to separate a column into multiple columns and to reverse the process by uniting multiple columns into a single column. Then you'll practise your data wrangling skills on messy real world data.
-
-* [**Join Data Sets**](https://rstudio.cloud/learn/primers/4.3) Learn how to work with relational data. Here you will learn how to augment data sets with information from related data sets, as well as how to filter one data set against another.
-
+::: {.callout-tip}
+## The many 'dialects' of the R programming language
 Please note that there are often different ways to do the same or similar things in R. This means you might encounter slightly different functions or styles of coding in different materials. This is not something to worry about. Just make sure you're clear on what a bit of code achieves and choose the function/style that you feel most comfortable with.
+:::
 
 ### Pre-lab activity 2: Getting ready for the lab class
 
