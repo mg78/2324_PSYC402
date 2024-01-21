@@ -99,7 +99,7 @@ Please note that there are often different ways to do the same or similar things
 ### Pre-lab activity 2: Getting ready for the lab class
 
 #### Get your files ready
-Download the [402_week12_forStudents.zip](files/week12/402_week12_forStudents.zip) file. 
+Download the [402_week12_forStudents.zip](data/week12/402_week12_forStudents.zip) file. 
 
 #### Remind yourself of how to access and work with the RStudio Server.
 
