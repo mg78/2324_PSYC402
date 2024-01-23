@@ -391,7 +391,6 @@ dat_means <- inner_join(wb_tot, screen2, "Serial") %>%
 ```
 :::
 
-
 > **TASK**: Now check that you have an object that is 72 observations of 4 variables. You should have a mean wellbeing score for every level of the hours, over weekdays and weekends for each level of the four types of screen time (4 x 2 x 9)
 
 Next, it is a good idea to visualise the mean well-being data as function of hours of screen-time for the different days (weekday vs. weekend) and types of screen (playing video games, using computers, using smartphone and watching tv). This is quite a complex graph. We'll go through creating it step-by-step, but let's first look at the end result:
@@ -484,6 +483,29 @@ As mentioned at the beginning, in today's lab we'll focus on smartphone use. So 
 >#and then group together each participant,
 >#and then summarise the mean hours calling it 'hours_per_day',
 >#save it in an object called 'smarttot'
+
+:::{.callout-tip collapse="true"}
+## Hint
+Below is a template for the code you need. Try to fill in the relevant bits
+```
+NEW_OBJECT <- DATA %>%
+  filter(variable == "?") %>%
+  group_by(VARIABLE) %>%
+  summarise(new_measure = mean(VARIABLE))
+```
+:::
+
+:::{.callout-tip collapse="true"}
+## Code
+The code to do this is below
+```
+smarttot <- screen2 %>% # use 'screen2'
+  filter(variable == "Using Smartphone") %>% # filter out the observations for 'Using Smartphone'
+  group_by(Serial) %>% # group together each participant
+  summarise(hours_per_day = mean(hours)) #summarise the mean hours calling it 'hours_per_day'
+```
+:::
+
 
 > **TASK**: Now let's do it the other way around. Run the code below. Have a look at the structure of 'smart_wb'.
 

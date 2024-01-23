@@ -914,9 +914,6 @@ Code
 <blockquote class="blockquote">
 <p>#use ‘screen2’ #and then filter out the observations for ‘Using Smartphone’, #and then group together each participant, #and then summarise the mean hours calling it ‘hours_per_day’, #save it in an object called ‘smarttot’</p>
 </blockquote>
-<blockquote class="blockquote">
-<p><strong>TASK</strong>: Now let’s do it the other way around. Run the code below. Have a look at the structure of ‘smart_wb’.</p>
-</blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -929,16 +926,59 @@ Hint
 </div>
 <div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>Below is a template for the code you need. Try to fill in the relevant bits</p>
+<pre><code>NEW_OBJECT &lt;- DATA %&gt;%
+  filter(variable == "?") %&gt;%
+  group_by(VARIABLE) %&gt;%
+  summarise(new_measure = mean(VARIABLE))</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below</p>
+<pre><code>smarttot &lt;- screen2 %&gt;% # use 'screen2'
+  filter(variable == "Using Smartphone") %&gt;% # filter out the observations for 'Using Smartphone'
+  group_by(Serial) %&gt;% # group together each participant
+  summarise(hours_per_day = mean(hours)) #summarise the mean hours calling it 'hours_per_day'</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Now let’s do it the other way around. Run the code below. Have a look at the structure of ‘smart_wb’.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <p>You can use the <code>str()</code> function.</p>
 </div>
 </div>
 </div>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-10_4a7af6d3ad0e8aa839b17dc02c141a75">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>smart_wb <span class="ot">&lt;-</span> smarttot <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hours_per_day <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(wb_tot, <span class="st">"Serial"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pinfo, <span class="st">"Serial"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as.factor</span>(sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>smart_wb <span class="ot">&lt;-</span> smarttot <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hours_per_day <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(wb_tot, <span class="st">"Serial"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pinfo, <span class="st">"Serial"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as.factor</span>(sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>QUESTION 5a</strong>: What does the code do? Write a short paragraph, using the phrase “and then” to represent the pipes.</p>
@@ -951,21 +991,21 @@ Hint
 <p><strong>TASK</strong> To further group the data, copy the code below to your script and run it. Look at the ‘smart_wb_gen’ dataframe. What has the code above done? Write a couple of sentences of description.</p>
 </blockquote>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-11_6924e8b2b05be8425afb9b552f852a92">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>smart_wb_gen <span class="ot">&lt;-</span> smart_wb <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hours_per_day, sex) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_wellbeing =</span> <span class="fu">mean</span>(tot_wellbeing))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>smart_wb_gen <span class="ot">&lt;-</span> smart_wb <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hours_per_day, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_wellbeing =</span> <span class="fu">mean</span>(tot_wellbeing))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Let’s visualise these data.</p>
 </blockquote>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-12_9322850562b7ff6bf550dc6ff205a0a2">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(smart_wb_gen, <span class="fu">aes</span>(hours_per_day, mean_wellbeing, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Sex"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Girls"</span>, <span class="st">"Boys"</span>))<span class="sc">+</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Total hours smartphone use"</span>) <span class="sc">+</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Mean well-being score"</span>) <span class="sc">+</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(smart_wb_gen, <span class="fu">aes</span>(hours_per_day, mean_wellbeing, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Sex"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Girls"</span>, <span class="st">"Boys"</span>))<span class="sc">+</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Total hours smartphone use"</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Mean well-being score"</span>) <span class="sc">+</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>QUESTION 6a</strong>: Write an interpretation of the above plot in plain English.</p>
@@ -988,13 +1028,13 @@ If you couldn’t upload files to the server, do this:
 </div>
 </div>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-13_474086dfb480af9c0c7189749f95476e">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://github.com/mg78/2324_PSYC402/blob/main/data/week12/smart_wb.csv?raw=true"</span>, <span class="at">destfile =</span> <span class="st">"smart_wb.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://github.com/mg78/2324_PSYC402/blob/main/data/week12/smart_wb.csv?raw=true"</span>, <span class="at">destfile =</span> <span class="st">"smart_wb.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Let’s run the regression. Write code in your script in which you call your output ‘mod’, and use the data ‘smart_wb’ using the following formula, <code>lm(y ~ x1 + x2 + x1:x2, data)</code> to construct your regression model. Go back to the research question for your outcome and two predictor variables.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1003,7 +1043,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Use the following template:</p>
 <pre><code>mod &lt;- lm(y ~ x1 + x2 + x1:x2, data)</code></pre>
@@ -1011,7 +1051,7 @@ Hint
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1020,7 +1060,7 @@ Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div id="callout-32" class="callout-32-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>mod &lt;- lm(tot_wellbeing ~ hours_per_day + sex + hours_per_day:sex, smart_wb)</code></pre>
 </div>
@@ -1030,7 +1070,7 @@ Code
 <p><strong>TASK</strong>: Call and save the summary of your model as ‘mod_summary’; then have a look at it.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1039,7 +1079,7 @@ Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div id="callout-33" class="callout-33-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>mod_summary &lt;- summary(mod)
 mod_summary</code></pre>
@@ -1071,7 +1111,7 @@ mod_summary</code></pre>
 <p><strong>TASK</strong>: We can check that the sex variable is treatment with the following code:</p>
 </blockquote>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-14_dae6f6d195c6b85da8dc5fe0cb39c3ce">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Because we have not explicitly told R about the labels for the sex variable, it has used level 0 as the reference level, hidden within the intercept term and level sex1 describes the difference (or slope) between level 0 and 1 or in this dataset from female to male.</p>
 <blockquote class="blockquote">
@@ -1082,19 +1122,19 @@ mod_summary</code></pre>
 <p><strong>TASK</strong> Use the code chunk below to: 1) Add a variable to the smart_wb data that is a deviation coding of sex; 2) Set the deviation coding (we’ll label it ‘Sum’ here for easy variable naming); and 3) Look at the output for the sum-coded sex variable.</p>
 </blockquote>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-15_5b6164eb4c4eb6b9f218da3204f9c795">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>smart_wb <span class="ot">&lt;-</span> <span class="fu">mutate</span>(smart_wb, <span class="at">sexSum =</span> sex) <span class="co"># add a variable to the smart_wb data that is a deviation coding of sex</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sexSum) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>) <span class="co"># wet the deviation coding</span></span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sexSum) <span class="co"># look at the output for the sum coded sex variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>smart_wb <span class="ot">&lt;-</span> <span class="fu">mutate</span>(smart_wb, <span class="at">sexSum =</span> sex) <span class="co"># add a variable to the smart_wb data that is a deviation coding of sex</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sexSum) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>) <span class="co"># wet the deviation coding</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sexSum) <span class="co"># look at the output for the sum coded sex variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, we’ll run the regression again, using the sum-coded sex variable and we’ll compare the outputs.</p>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-16_bef22cff5943f3ad4f09e61b727adaae">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model again, using the sumcoded sex model and compare outputs</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>mod_S <span class="ot">&lt;-</span> <span class="fu">lm</span>(tot_wellbeing <span class="sc">~</span> hours_per_day <span class="sc">+</span> sexSum <span class="sc">+</span> hours_per_day<span class="sc">:</span>sexSum, smart_wb)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>mod_S_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod_S)</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two model summary outputs</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>mod_summary</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>mod_S_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model again, using the sumcoded sex model and compare outputs</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>mod_S <span class="ot">&lt;-</span> <span class="fu">lm</span>(tot_wellbeing <span class="sc">~</span> hours_per_day <span class="sc">+</span> sexSum <span class="sc">+</span> hours_per_day<span class="sc">:</span>sexSum, smart_wb)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>mod_S_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod_S)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two model summary outputs</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>mod_summary</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>mod_S_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>‘sexSum1’ is now the coefficient for sex and represents the change from the intercept value which now lies between the values for being Female and Male. Note how this coefficient is negative.</p>
 <p>The earlier model had a positive coefficient because the intercept described the reference group of the Girls, who on average begin at a lower well-being level than Boys (refer back to the scatterplot to verify this). Because the sum-coding has moved the intercept to a point that is the center of the difference between Boys and Girls, sexSum1 now describes the distance between the centre and a level of Sex.</p>
@@ -1112,7 +1152,7 @@ mod_summary</code></pre>
 <p><strong>TASK</strong>: Create a QQ-plot to check the residuals are normally distributed.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-32-contents" aria-controls="callout-32" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-34-contents" aria-controls="callout-34" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1121,14 +1161,14 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-32" class="callout-32-contents callout-collapse collapse">
+<div id="callout-34" class="callout-34-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>You can use the <code>qqPlot()</code> function. The residuals are stored in the ‘mod’ object you created earlier.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-33-contents" aria-controls="callout-33" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-35-contents" aria-controls="callout-35" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1137,7 +1177,7 @@ Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-33" class="callout-33-contents callout-collapse collapse">
+<div id="callout-35" class="callout-35-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>qqPlot(mod$residuals)</code></pre>
 </div>
@@ -1151,8 +1191,8 @@ Code
 <p><strong>TASK</strong>: Copy the code chunk below to your script and run it.</p>
 </blockquote>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-17_1a5b9672fbff0814586cfe852dce917c">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))             <span class="co"># 4 charts in 1 panel</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)                     <span class="co"># this may take a few seconds to run</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))             <span class="co"># 4 charts in 1 panel</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)                     <span class="co"># this may take a few seconds to run</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The residuals vs leverage plot shows a flat red line so, whilst it isn’t perfect, we can assume that with such a large sample size regression is still an appropriate analysis.</p>
 <p><strong>Multi-collinearity</strong> Finally, lets check for multicollinearity using the <code>vif()</code> function. Essentially, this function estimates how much the variance of a coefficient is “inflated” because of linear dependence with other predictors, i.e., that a predictor isn’t actually adding any unique variance to the model, it’s just really strongly related to other predictors. Thankfully, vif is not affected by large samples like the other tests. There are various rules of thumb, but most converge on a VIF of above 2 to 2.5 for any one predictor being problematic.</p>
@@ -1160,7 +1200,7 @@ Code
 <p><strong>TASK</strong>: Copy the code chunk below to your script and run it.</p>
 </blockquote>
 <div class="cell" data-hash="Week12_cache/html/unnamed-chunk-18_a6896773ca29482f9132c150dcc0751f">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod)                      <span class="co"># Check for multi-collinearity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod)                      <span class="co"># Check for multi-collinearity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>QUESTION 8b</strong>: Do any of the predictors show evidence of multicollinearity?</p>
