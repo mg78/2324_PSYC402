@@ -186,6 +186,24 @@ library(tidyverse)
 ```
 :::
 
+::: {.callout-important}
+## If you couldn't upload files to the server, do this:
+If you experienced difficulties with uploading a folder or a file to the server, you can use the code below to directly download the file you need in this lab activity to the server (instead of first downloading it to you computer and then uploading it to the server). Remember that you can copy the code to your clipboard by clicking on the 'clipboard' in the top right corner.
+:::
+
+```{r eval=FALSE}
+download.file("https://github.com/mg78/2324_PSYC402/blob/main/data/week12/participant_info.csv?raw=true", destfile = "participant_info.csv")
+```
+
+```{r eval=FALSE}
+download.file("https://github.com/mg78/2324_PSYC402/blob/main/data/week12/screen_time.csv?raw=true", destfile = "screen_time.csv")
+```
+
+```{r eval=FALSE}
+download.file("https://github.com/mg78/2324_PSYC402/blob/main/data/week12/wellbeing.csv?raw=true", destfile = "wellbeing.csv")
+```
+
+
 > **TASK**: Finally, read in the three data files; call the participant info `pinfo`; call the screen_time data `screen` and the well-being data `wellbeing`.
 
 ::: {.callout-tip collapse="true"}
