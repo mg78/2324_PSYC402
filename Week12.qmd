@@ -229,7 +229,7 @@ head(wellbeing)
 
 The 'source and analysis code.sps' file in the 'Data and Code' section on the [**OSF-webpage**](https://osf.io/82ybd/) tells us how they coded the sex variable:  0 = female indicator and 1 = male indicator. It is worth exploring the OSF-webpage, to get used to foraging other files for these kinds of information, as they are not always clearly explained in a codebook or README. file.
 
-For ease, lets recode the sex variable to reflect word labels of 'female' and 'male'. This doesn't change the order: R will still see female as 0, and male as 1 because female occurs before male in the alphabet. Add the code below to your script to do this. Don't forget to run it as well.
+>**TASK**: For ease, lets recode the sex variable to reflect word labels of 'female' and 'male'. This doesn't change the order: R will still see female as 0, and male as 1 because female occurs before male in the alphabet. Add the code below to your script to do this. Don't forget to run it as well.
 
 ```{r eval=FALSE}
 pinfo$sex <- ifelse(pinfo$sex == 1, "male", "female")
@@ -378,7 +378,7 @@ dat_means <- inner_join(wb_tot, screen2, "Serial") %>%
 
 Next, it is a good idea to visualise the mean well-being data as function of hours of screen-time for the different days (weekday vs. weekend) and types of screen (playing video games, using computers, using smartphone and watching tv). This is quite a complex graph. We'll go through creating it step-by-step, but let's first look at the end result:
 
-![](files/week12/wellbeingByScreentime.png)
+![](data/week12/wellbeingByScreentime.png)
 
 Ok, that's what we are working towards.
 
@@ -396,6 +396,16 @@ ggplot(dat_means, aes(x = , y = )) +
   theme_bw()
 ```
 
+:::{.callout-tip collapse="true"}
+## Code
+```
+ggplot(dat_means, aes(x = hours, y = mean_wellbeing,)) +
+  geom_line() +
+  geom_point() +
+  theme_bw()
+```
+:::
+
 **QUESTION 4b**: What research question does this plot describe? Is it appropriate for the levels within the data?
 
 > **TASK**: Now, let's add a different linetype for each day (weekday vs. weekend). Fill in the blanks in the code below.
@@ -406,6 +416,16 @@ ggplot(dat_means, aes(x = , y = , linetype = )) +
   geom_point() +
   theme_bw()
 ```
+
+:::{.callout-tip collapse="true"}
+## Code
+```
+ggplot(dat_means, aes(x = hours, y = mean_wellbeing, linetype = day)) +
+  geom_line() +
+  geom_point() +
+  theme_bw()
+```
+:::
 
 **QUESTION 4c**: What research question does this plot describe? Is it appropriate for the levels within the data?
 
@@ -421,6 +441,17 @@ ggplot(dat_means, aes(x = , y = , linetype = )) +
   theme_bw()
 ```
 
+:::{.callout-tip collapse="true"}
+## Code
+```
+ggplot(dat_means, aes(hours, mean_wellbeing, linetype = day)) + # plot 'hours' on the x-axis, 'mean_wellbeing' on the y-axis and use a different type of line for the levels of 'day'
+  geom_line() + # add a line
+  geom_point() + # add point data
+  facet_wrap(~variable, nrow = 2) + # plot separate plots for each level of 'variable'
+  theme_bw() # use the 'black and white' theme
+```
+:::
+
 We add the `facet_wrap()` function here. You can check the `?facet_wrap()` help page for more information.
 
 **QUESTION 4d**: c. What does the `facet_wrap()` function do? Is this plot appropriate for the levels in the data?
@@ -429,11 +460,12 @@ We add the `facet_wrap()` function here. You can check the `?facet_wrap()` help 
 As mentioned at the beginning, in today's lab we'll focus on smartphone use. So looking at the bottom left of the figure we could suggest that smartphone use of more than 1 hour per day is associated with increasingly negative well-being the longer screen time people have. This looks to be a similar effect for Weekdays and Weekends, though perhaps overall well-being in Weekdays is marginally lower than in Weekends (the line for Weekday is lower on the y-axis than Weekends). This makes some sense as people tend to be happier on Weekends!
 
 > **TASK**: Below is a set of comments that describe what the chunk of code that you need to write next does:
-#use 'screen2'
-#and then filter out the observations for 'Using Smartphone',
-#and then group together each participant,
-#and then summarise the mean hours calling it 'hours_per_day',
-#save it in an object called 'smarttot'
+
+>#use 'screen2'
+>#and then filter out the observations for 'Using Smartphone',
+>#and then group together each participant,
+>#and then summarise the mean hours calling it 'hours_per_day',
+>#save it in an object called 'smarttot'
 
 > **TASK**: Now let's do it the other way around. Run the code below. Have a look at the structure of 'smart_wb'.
 
@@ -548,7 +580,10 @@ Because we have not explicitly told R about the labels for the sex variable, it 
 
 Now let's look at **deviation coding**. There are other ways to code your categorical variables. One of them is deviation coding (also sometimes called sum coding). This effectively divides the difference of the values between your categorical levels by the number of levels so that each level can be compared to one intercept that is central to them all rather than comparing levels to one reference level. It is like centering for a categorical level.
 
-> **TASK** Use the code chunk below to: 1) Add a variable to the smart_wb data that is a deviation coding of sex; 2) Set the deviation coding (we'll label it 'Sum' here for easy variable naming); and 3) Look at the output for the sum-coded sex variable.
+> **TASK** Use the code chunk below to:
+>1) Add a variable to the smart_wb data that is a deviation coding of sex;
+>2) Set the deviation coding (we'll label it 'Sum' here for easy variable naming); and
+>3) Look at the output for the sum-coded sex variable.
 
 ```{r eval=FALSE}
 smart_wb <- mutate(smart_wb, sexSum = sex) # add a variable to the smart_wb data that is a deviation coding of sex
@@ -568,15 +603,15 @@ mod_summary
 mod_S_summary
 ```
 
-'sexSum1' is now the coefficient for sex and represents the change from the intercept value which now lies between the values for being Female and Male. Note how this coefficient is a negative.
+'sexSum1' is now the coefficient for sex and represents the change from the intercept value which now lies between the values for being Female and Male. Note how this coefficient is negative.
 
 The earlier model had a positive coefficient because the intercept described the reference group of the Girls, who on average begin at a lower well-being level than Boys (refer back to the scatterplot to verify this). Because the sum-coding has moved the intercept to a point that is the center of the difference between Boys and Girls, sexSum1 now describes the distance between the centre and a level of Sex.
 
-Values for well-being in Girls are thus: Intercept + sexSum*+1
-49.74 + (-1.61)*(+1)
+Values for well-being in Girls are thus:
+$$ Intercept + sexSum*+1 = 49.74 + (-1.61)*(+1) $$
 
-Values for well-being in Boys are thus: Intercept + sexSum*-1
-49.74 + (-1.61)*(-1)
+Values for well-being in Boys are thus:
+$$Intercept + sexSum*-1 = 49.74 + (-1.61)*(-1)$$
 
 with the Boys being higher in well-being...(remember a negative number multiplied by a negative number produces a positive number and a negative number multiplied by a positive number produces a negative number).
 
