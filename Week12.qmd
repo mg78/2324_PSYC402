@@ -124,8 +124,6 @@ In this lab, you’ll gain understanding of and practice with:
 * interpreting the R output of multiple linear regression (when combining continuous and categorical predictors)
 * reporting results for multiple linear regression (when combining continuous and categorical predictors), following APA guidelines
 
-The lab activity will be added soon.
-
 ### Lab activity 1: Combining a continuous and a categorical predictor in a regression model
 
 #### Background: Smartphone screen-time and well-being
@@ -477,11 +475,12 @@ We add the `facet_wrap()` function here. You can check the `?facet_wrap()` help 
 As mentioned at the beginning, in today's lab we'll focus on smartphone use. So looking at the bottom left of the figure we could suggest that smartphone use of more than 1 hour per day is associated with increasingly negative well-being the longer screen time people have. This looks to be a similar effect for Weekdays and Weekends, though perhaps overall well-being in Weekdays is marginally lower than in Weekends (the line for Weekday is lower on the y-axis than Weekends). This makes some sense as people tend to be happier on Weekends!
 
 > **TASK**: Below is a set of comments that describe what the chunk of code that you need to write next does:
-#use 'screen2'
->#and then filter out the observations for 'Using Smartphone',
->#and then group together each participant,
->#and then summarise the mean hours calling it 'hours_per_day',
->#save it in an object called 'smarttot'
+
+> 1) #use 'screen2'
+> 2) #and then filter out the observations for 'Using Smartphone',
+> 3) #and then group together each participant,
+> 4) #and then summarise the mean hours calling it 'hours_per_day',
+> 5) #save it in an object called 'smarttot'
 
 :::{.callout-tip collapse="true"}
 ## Hint
