@@ -477,8 +477,7 @@ We add the `facet_wrap()` function here. You can check the `?facet_wrap()` help 
 As mentioned at the beginning, in today's lab we'll focus on smartphone use. So looking at the bottom left of the figure we could suggest that smartphone use of more than 1 hour per day is associated with increasingly negative well-being the longer screen time people have. This looks to be a similar effect for Weekdays and Weekends, though perhaps overall well-being in Weekdays is marginally lower than in Weekends (the line for Weekday is lower on the y-axis than Weekends). This makes some sense as people tend to be happier on Weekends!
 
 > **TASK**: Below is a set of comments that describe what the chunk of code that you need to write next does:
-
->#use 'screen2'
+#use 'screen2'
 >#and then filter out the observations for 'Using Smartphone',
 >#and then group together each participant,
 >#and then summarise the mean hours calling it 'hours_per_day',
@@ -486,7 +485,8 @@ As mentioned at the beginning, in today's lab we'll focus on smartphone use. So 
 
 :::{.callout-tip collapse="true"}
 ## Hint
-Below is a template for the code you need. Try to fill in the relevant bits
+Below is a template for the code you need. Try to fill in the relevant bits:
+
 ```
 NEW_OBJECT <- DATA %>%
   filter(variable == "?") %>%
@@ -497,7 +497,8 @@ NEW_OBJECT <- DATA %>%
 
 :::{.callout-tip collapse="true"}
 ## Code
-The code to do this is below
+The code to do this is below:
+
 ```
 smarttot <- screen2 %>% # use 'screen2'
   filter(variable == "Using Smartphone") %>% # filter out the observations for 'Using Smartphone'

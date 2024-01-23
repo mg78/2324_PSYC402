@@ -909,10 +909,7 @@ Code
 <h4 class="anchored" data-anchor-id="step-5-calculating-mean-hours-per-day-for-smartphone-use-for-each-participant">Step 5: Calculating mean hours per day for smartphone use, for each participant</h4>
 <p>As mentioned at the beginning, in today’s lab we’ll focus on smartphone use. So looking at the bottom left of the figure we could suggest that smartphone use of more than 1 hour per day is associated with increasingly negative well-being the longer screen time people have. This looks to be a similar effect for Weekdays and Weekends, though perhaps overall well-being in Weekdays is marginally lower than in Weekends (the line for Weekday is lower on the y-axis than Weekends). This makes some sense as people tend to be happier on Weekends!</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Below is a set of comments that describe what the chunk of code that you need to write next does:</p>
-</blockquote>
-<blockquote class="blockquote">
-<p>#use ‘screen2’ #and then filter out the observations for ‘Using Smartphone’, #and then group together each participant, #and then summarise the mean hours calling it ‘hours_per_day’, #save it in an object called ‘smarttot’</p>
+<p><strong>TASK</strong>: Below is a set of comments that describe what the chunk of code that you need to write next does: #use ‘screen2’ #and then filter out the observations for ‘Using Smartphone’, #and then group together each participant, #and then summarise the mean hours calling it ‘hours_per_day’, #save it in an object called ‘smarttot’</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
@@ -926,7 +923,7 @@ Hint
 </div>
 <div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Below is a template for the code you need. Try to fill in the relevant bits</p>
+<p>Below is a template for the code you need. Try to fill in the relevant bits:</p>
 <pre><code>NEW_OBJECT &lt;- DATA %&gt;%
   filter(variable == "?") %&gt;%
   group_by(VARIABLE) %&gt;%
@@ -946,7 +943,7 @@ Code
 </div>
 <div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The code to do this is below</p>
+<p>The code to do this is below:</p>
 <pre><code>smarttot &lt;- screen2 %&gt;% # use 'screen2'
   filter(variable == "Using Smartphone") %&gt;% # filter out the observations for 'Using Smartphone'
   group_by(Serial) %&gt;% # group together each participant
