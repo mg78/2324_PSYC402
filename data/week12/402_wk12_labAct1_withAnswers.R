@@ -41,7 +41,8 @@ wb_tot %>% summarise(mean = mean(tot_wellbeing),
                      max = max(tot_wellbeing))
 
 # Visualise the distribution in a histogram
-ggplot(wb_tot, aes(tot_wellbeing)) + geom_histogram() 
+ggplot(wb_tot, aes(tot_wellbeing)) +
+  geom_histogram() 
 
 # Step 4: Data preparation - Transforming screen time data -----------------------------------------
 

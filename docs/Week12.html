@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -157,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#sec-wk12-labactivities" id="toc-sec-wk12-labactivities" class="nav-link" data-scroll-target="#sec-wk12-labactivities">Lab activities</a>
   <ul class="collapse">
-  <li><a href="#lab-activity-combining-a-continuous-and-a-categorical-predictor-in-a-ression-model" id="toc-lab-activity-combining-a-continuous-and-a-categorical-predictor-in-a-ression-model" class="nav-link" data-scroll-target="#lab-activity-combining-a-continuous-and-a-categorical-predictor-in-a-ression-model">Lab activity: Combining a continuous and a categorical predictor in a ression model</a></li>
+  <li><a href="#lab-activity-1-combining-a-continuous-and-a-categorical-predictor-in-a-regression-model" id="toc-lab-activity-1-combining-a-continuous-and-a-categorical-predictor-in-a-regression-model" class="nav-link" data-scroll-target="#lab-activity-1-combining-a-continuous-and-a-categorical-predictor-in-a-regression-model">Lab activity 1: Combining a continuous and a categorical predictor in a regression model</a></li>
   </ul></li>
   <li><a href="#sec-wk12-answers" id="toc-sec-wk12-answers" class="nav-link" data-scroll-target="#sec-wk12-answers">Answers</a></li>
   </ul>
@@ -321,8 +355,8 @@ If you have difficulty uploading files to the server
 <li>reporting results for multiple linear regression (when combining continuous and categorical predictors), following APA guidelines</li>
 </ul>
 <p>The lab activity will be added soon.</p>
-<section id="lab-activity-combining-a-continuous-and-a-categorical-predictor-in-a-ression-model" class="level3">
-<h3 class="anchored" data-anchor-id="lab-activity-combining-a-continuous-and-a-categorical-predictor-in-a-ression-model">Lab activity: Combining a continuous and a categorical predictor in a ression model</h3>
+<section id="lab-activity-1-combining-a-continuous-and-a-categorical-predictor-in-a-regression-model" class="level3">
+<h3 class="anchored" data-anchor-id="lab-activity-1-combining-a-continuous-and-a-categorical-predictor-in-a-regression-model">Lab activity 1: Combining a continuous and a categorical predictor in a regression model</h3>
 <section id="background-smartphone-screen-time-and-well-being" class="level4">
 <h4 class="anchored" data-anchor-id="background-smartphone-screen-time-and-well-being">Background: Smartphone screen-time and well-being</h4>
 <p>There is currently much debate (and hype) surrounding smartphones and their effects on well-being, especially with regard to children and teenagers. We’ll be looking at data from this recent study of English adolescents: Przybylski, A. &amp; Weinstein, N. (2017). A Large-Scale Test of the Goldilocks Hypothesis. <em>Psychological Science, 28</em>, 204–215.</p>
@@ -340,204 +374,716 @@ If you have difficulty uploading files to the server
 <p>Please note that well-being and screen-time are technically only <strong>quasi-continuous</strong> inasmuch as that only discrete values are possible. However, there are a sufficient number of discrete categories in our data that we can treat the data as effectively continuous.</p>
 <p>Now, in terms of analysis, what we are effectively trying to do is to estimate <strong>two slopes</strong> relating screen-time to well-being, one for adolescent girls and one for adolescent boys, and then statistically compare these slopes. Sort of like running a correlation for boys, a correlation for girls, and comparing the two. Or alternatively, where you would run a regression (to estimate the slopes) but also one where you would need a t-test (to compare two groups). But the expressive power of regression allows us to do this all within a single model. Again, as we have seen building up to this lab, an independent groups t-test is just a special case of ordinary regression with a single categorical predictor; ANOVA is just a special case of regression where all predictors are categorical. But remember, although we can express any ANOVA design using regression, the converse is not true: we cannot express every regression design in ANOVA. As such people like regression, and the general linear model, as it allows us to have any combination of continuous and categorical predictors in the model. The only inconvenience with running ANOVA models as regression models is that you have to take care in how you numerically code the categorical predictors. We will use an approach called <strong>deviation coding</strong> which we will look at today later in this lab.</p>
 <p>To complete this lab activity, you can use the R-script (<code>402_wk12_labAct1_template.R</code>) that you downloaded as part of the ‘Pre-lab activities’ as a template. Work through the activity below, adding relevant bits of code to your script as you go along.</p>
-<!-- #### Step 1: Background and set up -->
-<!-- Before we get stuck in we need to set up a few things.  -->
-<!-- > **TASK**: Add code to clear the environment. **HINT**: `rm(list=ls())` -->
-<!-- Next we need to tell R which libraries to use. We need `broom`, `car` and `tidyverse`. -->
-<!-- > **TASK**: Add code to load relevant libraries. **HINT**: `library()` -->
-<!-- Finally, read in the three data files; call the participant info `pinfo`; call the screen_time data `screen` and the well-being data `wellbeing`. -->
-<!-- > **TASK*: Add code to read in the three data files. **HINT**: Use the `read_csv()` function. -->
-<!-- #### Step 2: Checking the formatting -->
-<!-- Given our research question and the information you have about the scores, -->
-<!-- provided above under 'Background' and from the OSF-webpage, is the data ready for use? -->
-<!-- > **TASK**: Add code to look at the first few lines of each data frame. **HINT**: Use the `head()` function (or `tail()` function). -->
-
-<!-- **QUESTION 1**: In which table is the variable corresponding to sex located and what is this variable called? -->
-<!-- The 'source and analysis code.sps' file in the 'Data and Code' section on the [**OSF-webpage**](https://osf.io/82ybd/) tells us how they coded the sex variable:  0 = female indicator and 1 = male indicator. It is worth exploring the OSF-webpage, to get used to foraging other files for these kinds of information, as they are not always clearly explained in a codebook or README. file. -->
-<!-- For ease, lets recode the sex variable to reflect word labels of 'female' and 'male'. This doesn't change the order: R will still see female as 0, and male as 1 because female occurs before male in the alphabet. Add the code below to your script to do this. Don't forget to run it as well. -->
-<!-- ```{r eval=FALSE} -->
-<!-- pinfo$sex <- ifelse(pinfo$sex == 1, "male", "female") -->
-<!-- head(pinfo)                             -->
-<!-- ``` -->
-<!-- **QUESTION 2**: In what format is the well-being data (long or wide)? On how many participants does it include observations? And on how many items for each participant? -->
-<!-- **QUESTION 3**: What is the name of the variable that identifies individual participants in this dataset? It is important to work this out as this variable will allow us to link information across the three data files. -->
-<!-- #### Step 3: Data preparation - Aggregating the total well-being scores  -->
-<!-- We need to sum the 14 items of the well-being scale for each participant to create one well-being score per participant. -->
-<!-- > **TASK**: To create one well-being score per participant add code to the script to do the following: first, transform the `well-being` variable from wide to long (using `pivot_longer()`); then, use `group_by()` to get scores for each participant and finally use `summarise()` to calculate a total well-being score, calling the new variable `tot_wellbeing`. Save all of this to an object called 'wb_tot'. -->
-<!-- It is useful to calculate some descriptive statistics for the new variable `tot_wellbeing`. -->
-<!-- > **TASK**: Calculate some descriptive statistics for `tot_wellbeing`. **HINT**: Use `summarise()` to calculate the mean, standard deviation, minimum and maximum values. -->
-<!-- Finally, let's get an idea of the distribution of the new variable `tot_wellbeing`. -->
-<!-- > **TASK**: Visualise the distribution in a histogram. **HINT**: Use `ggplot()` and `geom_historgram()`. -->
-<!-- **QUESTION 4**: Is the distribution of well-being scores symmetrical, negatively skewed or positively skewed? -->
-<!-- #### Step 4: Data preparation - Transforming screen time data -->
-<!-- Great, so we have the well-being scores sorted out, we now need to think about the screen-time usage data and -->
-<!-- whether it is being used on a weekday or a weekend. As always, to get an idea of the data, it is often very -->
-<!-- useful to visualise the variables before proceeding with the analysis. -->
-<!-- Before we can do this, we'll need to tidy these data up. Have another look at the `screen` data by using the `head()` function. You'll see that we have `Serial` in the first column (this is good), but in the following eight columns, we have columns for each type of activity (Comph, Comp, Smart, Watch) and the part of the week it took place (we and wk) combined. Instead, to be able to work with the data, we need two columns: one for the type of activity (we'll call it `variable`) and one for the part of the week (we'll call it `day`). -->
-<!-- A second issue is that we need to alter the abbreviations Comph, Comp, Smart and Watch to reflect more descriptive text for each in plots. -->
-<!-- Below are two chunks of code that represent these steps. In the next tasks you'll practise with taking a set of piped commands apart. The purpose of this is to get you used to "parsing" the code at the right places so that when you see piped commands in other people's code, you know how to break it down and find the relevant parts that you can use. -->
-<!-- > **TASK**: In the code chunk below we use the `separate()` function to split the character strings already in the dataset. You know that with piped commands, there are chunks of code. Run the code first in its entirety and then pull each line apart to see how each function works on the data. Write a descriptive sentence for each function's role in the command. Don't forget to copy the chunk to your script and run it. -->
-<!-- ```{r eval=FALSE} -->
-<!-- screen_long <- screen %>% -->
-<!--   pivot_longer(-Serial, names_to = "var", values_to = "hours") %>% -->
-<!--   separate(var, c("variable", "day"), "_")                        -->
-<!-- ``` -->
-<!-- > **TASK**: In the next code chunk we use the `dplyr::recode()` function with `mutate()` to relabel the separated names into -->
-<!-- understandable names that will be clear in plots. Again, run the code first in its entirety and then pull each line apart to see how each function works on the data. Write a descriptive sentence for each function's role in the command. Don't forget to copy the chunk to your script and run it. -->
-<!-- ```{r eval=FALSE} -->
-<!-- screen2 <- screen_long %>% -->
-<!--   mutate(variable = dplyr::recode(variable, -->
-<!--                                   "Watch" = "Watching TV", -->
-<!--                                   "Comp" = "Playing Video Games", -->
-<!--                                   "Comph" = "Using Computers", -->
-<!--                                   "Smart" = "Using Smartphone"), -->
-<!--          day = dplyr::recode(day, -->
-<!--                              "wk" = "Weekday", -->
-<!--                              "we" = "Weekend"))                    -->
-<!-- ``` -->
-<!-- The code above has a new feature: the `dplyr::recode` part. This syntax -- using the double colon -- happens when there are many versions of a function with the same name. You can imagine that a function called 'recode' is immensely useful at the data wrangling stage of analysis. By using the name of the package, a double set of colons, followed by a function name, you are ensuring that R uses a particular version of the function, at that point only. This avoids having two or more packages loaded in your environment that sometimes do not play nicely together! -->
-<!-- To be able to monitor that your code is performing as you want it to, you need to have in your mind an idea of how the data should look at the end of a code chunk. So stop a moment and be clear, discuss with your lab-mates if you feel like it and answer the following question. -->
-<!-- **QUESTION 5**: What are the variables and the levels or conditions within each variable of screen2? -->
-<!-- >**TASK**:Now join `wb_tot` and `screen_2` by participant and then group by the variables 'variable', 'day' and 'hours' and then calculate a 'mean_wellbeing' variable for each of the grouped levels. Save it in an object called 'dat_means'.**HINT**: Write separate lines of code for each action and then, when you know they all work, reformat them as a piped command; look back earlier in this code and last week for the functions that perform these actions. -->
-<!-- > **TASK**: Now check that you have an object that is 72 observations of 4 variables. You should have a mean wellbeing score for every level of the hours, over weekdays and weekends for each level of the four types of screen time (4 x 2 x 9) -->
-<!-- Next, it is a good idea to visualise the mean well-being data as function of hours of screen-time for the different days (weekday vs. weekend) and types of screen (playing video games, using computers, using smartphone and watching tv). This is quite a complex graph. We'll go through creating it step-by-step, but let's first look at the end result: -->
-<!-- ![](files/week12/wellbeingByScreentime.png) -->
-<!-- Ok, that's what we are working towards. -->
-<!-- > **TASK**: Below, a chunk of code is presented. It is your task to fill in the x and y variables. **HINT**: Go back to the research question - which variable is for the x axis and for the y axis? -->
-<!-- ```{r eval=FALSE} -->
-<!-- ggplot(dat_means, aes(x = , y = )) + -->
-<!--   geom_line() + -->
-<!--   geom_point() + -->
-<!--   theme_bw() -->
-<!-- ``` -->
-<!-- **QUESTION 6a**: What research question does this plot describe? Is it appropriate for the levels within the data? -->
-<!-- > **TASK**: Now, let's add a different linetype for each day (weekday vs. weekend). Fill in the blanks in the code below. -->
-<!-- ```{r eval=FALSE} -->
-<!-- ggplot(dat_means, aes(x = , y = , linetype = )) + -->
-<!--   geom_line() + -->
-<!--   geom_point() + -->
-<!--   theme_bw() -->
-<!-- ``` -->
-<!-- **QUESTION 6b**: What research question does this plot describe? Is it appropriate for the levels within the data? -->
-<!-- Still not quite there. -->
-<!-- >**TASK**: Fill in the blanks (for x, y and linetype) as before. Now have a good look at the code below. What has changed? Copy the code to your script and run it. Then, for each line write a sentence as a comment to describe its effect on the plot. -->
-<!-- ```{r eval=FALSE} -->
-<!-- ggplot(dat_means, aes(x = , y = , linetype = )) + -->
-<!--   geom_line() + -->
-<!--   geom_point() + -->
-<!--   facet_wrap(~variable, nrow = 2) + -->
-<!--   theme_bw() -->
-<!-- ``` -->
-<!-- We add the `facet_wrap()` function here. You can check the `?facet_wrap()` help page for more information. -->
-<!-- **QUESTION 6**: c. What does the `facet_wrap()` function do? Is this plot appropriate for the levels in the data? -->
-<!-- #### Step 5: Calculating mean hours per day for smartphone use, for each participant -->
-<!-- As mentioned at the beginning, in today's lab we'll focus on smartphone use. So looking at the bottom left of the figure we could suggest that smartphone use of more than 1 hour per day is associated with increasingly negative well-being the longer screen time people have. This looks to be a similar effect for Weekdays and Weekends, though perhaps overall well-being in Weekdays is marginally lower than in Weekends (the line for Weekday is lower on the y-axis than Weekends). This makes some sense as people tend to be happier on Weekends! -->
-<!-- > **TASK**: Below is a set of comments that describe what the chunk of code that you need to write next does: -->
-<!-- use 'screen2' -->
-<!-- and then filter out the observations for 'Using Smartphone', -->
-<!-- and then group together each participant, -->
-<!-- and then summarise the mean hours calling it 'hours_per_day', -->
-<!-- save it in an object called 'smarttot' -->
-<!-- > **TASK**: Now let's do it the other way around. Run the code below. Have a look at the structure of 'smart_wb' **HINT**: You can use the `str()` function. What does the code do?  -->
-<!-- ```{r eval=FALSE} -->
-<!-- smart_wb <- smarttot %>% -->
-<!--   filter(hours_per_day > 1) %>% -->
-<!--   inner_join(wb_tot, "Serial") %>% -->
-<!--   inner_join(pinfo, "Serial") %>% -->
-<!--   mutate(sex = as.factor(sex))  -->
-<!-- ``` -->
-<!-- **QUESTION 7**: What does the code do? Write a short paragraph, using the phrase "and then" to represent the pipes. -->
-<!-- #### Step 6: More visualisation -->
-<!-- We are now using only one small part of the data - smartphone use and its relationship with well-being over different durations of time. Before formally testing our research question, we can visualise the data and enquire about sex differences on the same plot - run each chunk of code below: -->
-<!-- > **TASK** To further group the data, copy the code below to your script and run it. Look at the 'smart_wb_gen' dataframe. What has the code above done? Write a couple of sentences of description -->
-<!-- ```{r eval=FALSE} -->
-<!-- smart_wb_gen <- smart_wb %>% -->
-<!--   group_by(hours_per_day, sex) %>% -->
-<!--   summarise(mean_wellbeing = mean(tot_wellbeing)) -->
-<!-- ``` -->
-<!-- > **TASK**: Let's visualise these data. -->
-<!-- ```{r eval=FALSE} -->
-<!-- ggplot(smart_wb_gen, aes(hours_per_day, mean_wellbeing, color = sex)) + -->
-<!--   geom_point() + -->
-<!--   geom_smooth(method = "lm") + -->
-<!--   scale_color_discrete(name = "Sex", labels = c("Girls", "Boys"))+ -->
-<!--   scale_x_continuous(name = "Total hours smartphone use") + -->
-<!--   scale_y_continuous(name = "Mean well-being score") + -->
-<!--   theme_bw() -->
-<!-- ``` -->
-<!-- **QUESTION 8**: Write an interpretation of the above plot in plain English. -->
-<!-- #### Step 7: The regression model -->
-<!-- In the steps 2 to 6 we've covered some pretty heavy-lifting data-wrangling. As it is so often the case that something like this is needed when working with real data, ti is really important to practise this. However, to ensure you also spend time on fitting the regression model and interpreting the output, you can choose to use the data-file [smart_wb.csv](files/week12/smart_wb.csv) to get started with that. It contains the data in a format that is the result of all the data-wrangling we did in steps 2 to 6. So, download the smart_sb.csv data-file, put it in the folder that is your working directory and you're all set for running the regression model. -->
-<!-- If the smart_wb.csv file that you can download above does not want to upload to the server, try using the code below to read it directly from the web: -->
-<!-- ```{r eval=FALSE} -->
-<!-- smart_wb <- read_csv("https://raw.githubusercontent.com/mg78/lu_psyc402/main/files/week12/smart_wb.csv") -->
-<!-- ``` -->
-<!-- > **TASK**: Let's run the regression. Write code in your script in which you call your output 'mod', and use the data 'smart_wb' using the following formula, `lm(y ~ x1 + x2 + x1:x2, data)` to construct your regression model. Go back to the research question for your outcome and two predictor variables. -->
-<!-- > **TASK**: Call and save the summary of your model as 'mod_summary'; then have a look at it. -->
-<!-- Let's first look at the model as a whole: -->
-<!-- **QUESTION 9**: What is the p-value for the overall model? Is it significant? What does this mean? -->
-<!-- **QUESTION 10**: To two decimal places, what percentage of the variance in well-being scores does the overall model explain? -->
-<!-- Now, lets look at the coefficients of our predictors: -->
-<!-- **QUESTION 11**: Are the main effects of smartphone use and sex significant? -->
-<!-- **QUESTION 12**: Which variable indicates the interaction between smartphone use and sex? -->
-<!-- **QUESTION 13**: And is the interaction significant? -->
-<!-- **QUESTION 14**: What is the most reasonable interpretation of these results?  -->
-<!-- The above model uses **treatment coding** (sometimes called dummy coding), for the sex variable. In a categorical variable with only two levels this means that one level is coded as 0 and the other level is coded as 1. In categorical variables with more than two levels, it works slightly differently. -->
-<!-- > **TASK**: We can check that the sex variable is treatment or dummy coded with the following code: -->
-<!-- ```{r eval=FALSE} -->
-<!-- contrasts(smart_wb$sex) -->
-<!-- ``` -->
-<!-- Because we have not explicitly told R about the labels for the sex variable, it has used level 0 as the reference level, hidden within the intercept term and level sex1 describes the difference (or slope) between level 0 and 1 or in this dataset from female to male. -->
-<!-- **QUESTION 15**: Is being Male better for a person's well-being in the context of smartphone use than being Female? -->
-<!-- Now let's look at **deviation coding**. There are other ways to code your categorical variables. One of them is deviation coding (also sometimes called sum coding). This effectively divides the difference of the values between your categorical levels by the number of levels so that each level can be compared to one intercept that is central to them all rather than comparing levels to one reference level. It is like centering for a categorical level. -->
-<!-- > **TASK** Use the code chunk below to: 1) add a variable to the smart_wb data that is a deviation coding of sex; 2) set the deviation coding (we'll labe it 'Sum' here for easy variable naming); and 3) look at the output for the sum-coded sex variable. -->
-<!-- ```{r eval=FALSE} -->
-<!-- smart_wb <- mutate(smart_wb, sexSum = sex) # add a variable to the smart_wb data that is a deviation coding of sex -->
-<!-- contrasts(smart_wb$sexSum) <- contr.sum(2) # wet the deviation coding -->
-<!-- contrasts(smart_wb$sexSum) # look at the output for the sum coded sex variable -->
-<!-- ``` -->
-<!-- Next, we'll run the regression again, using the sum-coded sex variable and we'll compare the outputs. -->
-<!-- ```{r eval=FALSE} -->
-<!-- # Run the regression model again, using the sumcoded sex model and compare outputs -->
-<!-- mod_S <- lm(tot_wellbeing ~ hours_per_day + sexSum + hours_per_day:sexSum, smart_wb) -->
-<!-- mod_S_summary <- summary(mod_S) -->
-<!-- # Compare the two model summary outputs -->
-<!-- mod_summary -->
-<!-- mod_S_summary -->
-<!-- ``` -->
-<!-- 'sexSum1' is now the coefficient for sex and represents the change from the intercept value which now lies between the values for being Female and Male. Note how this coefficient is a negative. -->
-<!-- The earlier model had a positive coefficient because the intercept described the reference group of the Girls, who on average begin at a lower well-being level than Boys (refer back to the scatterplot to verify this). Because the sum-coding has moved the intercept to a point that is the center of the difference between Boys and Girls, sexSum1 now describes the distance between the centre and a level of Sex. -->
-<!-- Values for well-being in Girls are thus: Intercept + sexSum*+1 -->
-<!-- 49.74 + (-1.61)*(+1) -->
-<!-- Values for well-being in Boys are thus: Intercept + sexSum*-1 -->
-<!-- 49.74 + (-1.61)*(-1) -->
-<!-- with the Boys being higher in well-being...(remember a negative number multiplied by a negative number produces a positive number and a negative number multiplied by a positive number produces a negative number). -->
-<!-- The interpretation of both model effects is the same, and if you look at the summary statistics, they are identical. Deviation coding effectively centers your categorical variables and helps with interpretation of interaction terms. -->
-<!-- #### Step 8: Checking assumptions -->
-<!-- Now that we've fit a model, let's check whether it meets the assumptions of linearity, normality and homoscedasticity. With regression models, you do this after you've actually fit the model. -->
-<!-- **Linearity** -->
-<!-- Unlike when we did simple regression we can’t use `crPlots()` to test for linearity when there is an interaction, but we know from looking at the grouped scatterplot that this assumption has been met. -->
-<!-- **Normality** -->
-<!-- Normally we would test for normality with a QQ-plot and a Shapiro-Wilk test. However, because this dataset is so large, the Shapiro-Wilk is not appropriate (if you try to run the test it will produce a warning telling you that the sample size must be between 3 and 5000). This is because with extremely large sample sizes the Shapiro-Wilk test will find that any deviation from normality is significant. Therefore we should judge normality based upon the QQ-plot. -->
-<!-- > **TASK**: Create a QQ-plot to check the residuals are normally distributed **HINT**: You can use the `qqPlot()` function. The residuals are stored in the 'mod' object you created earlier. -->
-<!-- **QUESTION 16**: What do you conclude from the QQ-plot? -->
-<!-- **Homoscedasticity** -->
-<!-- Here we have the same problem as with testing for normality: with such a large sample the `ncvTest()` will produce a significant result for any deviation from homoscedasticity. So we need to rely on plots again. To check for homoscedasticity we can use `plot()` from Base R that will produce a bunch of helpful plots (more information [**here**:](https://www.r-bloggers.com/2016/01/how-to-detect-heteroscedasticity-and-rectify-it/). -->
-<!-- > **TASK**: Copy the code chunk below to your script and run it. -->
-<!-- ```{r eval=FALSE} -->
-<!-- par(mfrow=c(2,2))             # 4 charts in 1 panel -->
-<!-- plot(mod)                     # this may take a few seconds to run -->
-<!-- ``` -->
-<!-- The residuals vs leverage plot shows a flat red line so, whilst it isn’t perfect, we can assume that with such a large sample size regression is still an appropriate analysis. -->
-<!-- **Multi-collinearity** -->
-<!-- Finally, lets check for multicollinearity using the `vif()` function. Essentially, this function estimates how much the variance of a coefficient is “inflated” because of linear dependence with other predictors, i.e., that a predictor isn’t actually adding any unique variance to the model, it’s just really strongly related to other predictors. Thankfully, vif is not affected by large samples like the other tests. There are various rules of thumb, but most converge on a VIF of above 2 to 2.5 for any one predictor being problematic. -->
-<!-- > **TASK**: Copy the code chunk below to your script and run it. -->
-<!-- ```{r eval=FALSE} -->
-<!-- vif(mod)                      # Check for multi-collinearity -->
-<!-- ``` -->
-<!-- **QUESTION 17**: Do any of the predictors show evidence of multicollinearity? -->
-<!-- #### Step 9: Write up -->
-<!-- **QUESTION 18**: How would you write up the results following APA guidance? You can choose whether you do so for the model using treatment coding or for the model using deviation coding. -->
+</section>
+<section id="step-1-background-and-set-up" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-background-and-set-up">Step 1: Background and set up</h4>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Set your working directory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The folder you were asked to download under ‘Pre-lab activity 3: Getting ready for the lab class’ contains the data files we’ll need. Make sure you have set your working directory to this folder by right-clicking on it and selecting ‘Set as working directory’.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Empty the R environment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you do anything else, when starting a new analysis, it is a good idea to empty the R environment. This prevents objects and variables from previous analyses interfering with the current one. To do this, you can click on the little broom icon in the top right of the Environment pane, or you can use <code>rm(list=ls())</code>.</p>
+</div>
+</div>
+<p>Before we can get started we need to tell R which libraries to use. For this analysis we’ll need <code>broom</code>, <code>car</code> and <code>tidyverse</code>.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Load the relevant libraries. If you are unsure how to do that, you can look at the ‘Hint’ below for a clue by expanding it. After that, if you are still unsure, you can view the code by expanding the ‘Code’ section below.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>library()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below.</p>
+<pre><code>library(broom)
+library(car)
+library(tidyverse)</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Finally, read in the three data files; call the participant info <code>pinfo</code>; call the screen_time data <code>screen</code> and the well-being data <code>wellbeing</code>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>read_csv()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below.</p>
+<pre><code>pinfo &lt;- read_csv("participant_info.csv")                                   
+screen &lt;- read_csv("screen_time.csv")
+wellbeing &lt;- read_csv("wellbeing.csv")</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-checking-the-formatting" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-checking-the-formatting">Step 2: Checking the formatting</h4>
+<p>Given our research question and the information you have about the scores, provided above under ‘Background’ and from the OSF-webpage, is the data ready for use?</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Add code to look at the first few lines of each data frame.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>head()</code> function (or <code>tail()</code> function).</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below:</p>
+<pre><code>head(pinfo)                                  # Look at the data frames
+head(screen)
+head(wellbeing)</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 2a</strong>: In which table is the variable corresponding to sex located and what is this variable called?</p>
+</blockquote>
+<p>The ‘source and analysis code.sps’ file in the ‘Data and Code’ section on the <a href="https://osf.io/82ybd/"><strong>OSF-webpage</strong></a> tells us how they coded the sex variable: 0 = female indicator and 1 = male indicator. It is worth exploring the OSF-webpage, to get used to foraging other files for these kinds of information, as they are not always clearly explained in a codebook or README. file.</p>
+<p>For ease, lets recode the sex variable to reflect word labels of ‘female’ and ‘male’. This doesn’t change the order: R will still see female as 0, and male as 1 because female occurs before male in the alphabet. Add the code below to your script to do this. Don’t forget to run it as well.</p>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-1_73bce45a26213c211c26a15ef09c6297">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pinfo<span class="sc">$</span>sex <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(pinfo<span class="sc">$</span>sex <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"male"</span>, <span class="st">"female"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(pinfo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 2b</strong>: In what format is the well-being data (long or wide)? On how many participants does it include observations? And on how many items for each participant?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>QUESTION 2c</strong>: What is the name of the variable that identifies individual participants in this dataset? It is important to work this out as this variable will allow us to link information across the three data files.</p>
+</blockquote>
+</section>
+<section id="step-3-data-preparation---aggregating-the-total-well-being-scores" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-data-preparation---aggregating-the-total-well-being-scores">Step 3: Data preparation - Aggregating the total well-being scores</h4>
+<p>We need to sum the 14 items of the well-being scale for each participant to create one well-being score per participant.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: To create one well-being score per participant, add code to the script to do the following: first, transform the <code>well-being</code> data frame from wide to long (using <code>pivot_longer()</code>); then, use <code>group_by()</code> to get scores for each participant and finally use <code>summarise()</code> to calculate a total well-being score, calling the new variable <code>tot_wellbeing</code>. Save all of this to an object called <code>wb_tot</code>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Below is a code template. Make sure to add the relevant sections.</p>
+<pre><code>wb_tot &lt;- DATA %&gt;%
+  pivot_longer(-Serial, names_to = "", values_to = "") %&gt;%
+  group_by(?) %&gt;%
+  summarise(tot_wellbeing = sum(?))</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>wb_tot &lt;- wellbeing %&gt;%
+  pivot_longer(-Serial, names_to = "question", values_to = "score") %&gt;%
+  group_by(Serial) %&gt;%
+  summarise(tot_wellbeing = sum(score))</code></pre>
+</div>
+</div>
+</div>
+<p>It is useful to calculate some descriptive statistics for the new variable <code>tot_wellbeing</code>.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Calculate some descriptive statistics for <code>tot_wellbeing</code>.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>summarise()</code> to calculate the mean, standard deviation, minimum and maximum values.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>wb_tot %&gt;% summarise(mean = mean(tot_wellbeing),
+                     sd = sd(tot_wellbeing),
+                     min = min(tot_wellbeing), 
+                     max = max(tot_wellbeing))</code></pre>
+</div>
+</div>
+</div>
+<p>Finally, let’s get an idea of the distribution of the new variable <code>tot_wellbeing</code>.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Visualise the distribution in a histogram.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>ggplot()</code> and <code>geom_historgram()</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>ggplot(wb_tot, aes(tot_wellbeing)) +
+  geom_histogram() </code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 3a</strong>: Is the distribution of well-being scores symmetrical, negatively skewed or positively skewed?</p>
+</blockquote>
+</section>
+<section id="step-4-data-preparation---transforming-screen-time-data" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-data-preparation---transforming-screen-time-data">Step 4: Data preparation - Transforming screen time data</h4>
+<p>Great, so we have the well-being scores sorted out, we now need to think about the screen-time usage data and whether it is being used on a weekday or a weekend. As always, to get an idea of the data, it is often very useful to visualise the variables before proceeding with the analysis.</p>
+<p>Before we can do this, we’ll need to tidy these data up. Have another look at the <code>screen</code> data by using the <code>head()</code> function. You’ll see that we have <code>Serial</code> in the first column (this is good), but in the following eight columns, we have columns for each type of activity (Comph, Comp, Smart, Watch) and the part of the week it took place (we and wk) combined. Instead, to be able to work with the data, we need two columns: one for the type of activity (we’ll call it <code>variable</code>) and one for the part of the week (we’ll call it <code>day</code>).</p>
+<p>A second issue is that we need to alter the abbreviations Comph, Comp, Smart and Watch to reflect more descriptive text for each in plots.</p>
+<p>Below are two chunks of code that represent these steps. In the next tasks you’ll practise with taking a set of piped commands apart. The purpose of this is to get you used to “parsing” the code at the right places so that when you see piped commands in other people’s code, you know how to break it down and find the relevant parts that you can use.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: In the code chunk below we use the <code>separate()</code> function to split the character strings already in the dataset. You know that with piped commands, there are chunks of code. Run the code first in its entirety and then pull each line apart to see how each function works on the data. Write a descriptive sentence for each function’s role in the command. Don’t forget to copy the chunk to your script and run it.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-2_3d2ebd27ff6b284cb5ef4be1d0982993">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>screen_long <span class="ot">&lt;-</span> screen <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>Serial, <span class="at">names_to =</span> <span class="st">"var"</span>, <span class="at">values_to =</span> <span class="st">"hours"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate</span>(var, <span class="fu">c</span>(<span class="st">"variable"</span>, <span class="st">"day"</span>), <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: In the next code chunk we use the <code>dplyr::recode()</code> function with <code>mutate()</code> to relabel the separated names into understandable names that will be clear in plots. Again, run the code first in its entirety and then pull each line apart to see how each function works on the data. Write a descriptive sentence for each function’s role in the command. Don’t forget to copy the chunk to your script and run it.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-3_4ff3a219e1586ab001e577fc7a9211c0">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>screen2 <span class="ot">&lt;-</span> screen_long <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">variable =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(variable,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Watch"</span> <span class="ot">=</span> <span class="st">"Watching TV"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Comp"</span> <span class="ot">=</span> <span class="st">"Playing Video Games"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Comph"</span> <span class="ot">=</span> <span class="st">"Using Computers"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="st">"Smart"</span> <span class="ot">=</span> <span class="st">"Using Smartphone"</span>),</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">day =</span> dplyr<span class="sc">::</span><span class="fu">recode</span>(day,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"wk"</span> <span class="ot">=</span> <span class="st">"Weekday"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>                             <span class="st">"we"</span> <span class="ot">=</span> <span class="st">"Weekend"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The code above has a new feature: the <code>dplyr::recode</code> part. This syntax – using the double colon – happens when there are many versions of a function with the same name. You can imagine that a function called ‘recode’ is immensely useful at the data wrangling stage of analysis. By using the name of the package, a double set of colons, followed by a function name, you are ensuring that R uses a particular version of the function, at that point only. This avoids having two or more packages loaded in your environment that sometimes do not play nicely together!</p>
+</div>
+</div>
+<p>To be able to monitor that your code is performing as you want it to, you need to have in your mind an idea of how the data should look at the end of a code chunk. So stop a moment and be clear, discuss with your lab-mates if you feel like it and answer the following question.</p>
+<blockquote class="blockquote">
+<p><strong>QUESTION 4a</strong>: What are the variables and the levels or conditions within each variable of screen2?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>:Now join <code>wb_tot</code> and <code>screen_2</code> by participant and then group by the variables ‘variable’, ‘day’ and ‘hours’ and then calculate a ‘mean_wellbeing’ variable for each of the grouped levels. Save it in an object called ‘dat_means’.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Write separate lines of code for each action and then, when you know each of them works, reformat them as a piped command. You’ll need <code>inner_join()</code>, <code>group_by()</code> and <code>summarise()</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Below templates for separate lines of code for each action. You’ll need to replace the names of relevant data frames and variables.</p>
+<pre><code>joined &lt;- inner_join(data1, data2, by=)
+grouped &lt;- group_by(data, var1, var2, var3)
+means &lt;- summarise(data, mean = mean(variable))</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Below the code for a piped command.</p>
+<pre><code>dat_means &lt;- inner_join(wb_tot, screen2, "Serial") %&gt;%
+  group_by(variable, day, hours) %&gt;%
+  summarise(mean_wellbeing = mean(tot_wellbeing))</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Now check that you have an object that is 72 observations of 4 variables. You should have a mean wellbeing score for every level of the hours, over weekdays and weekends for each level of the four types of screen time (4 x 2 x 9)</p>
+</blockquote>
+<p>Next, it is a good idea to visualise the mean well-being data as function of hours of screen-time for the different days (weekday vs.&nbsp;weekend) and types of screen (playing video games, using computers, using smartphone and watching tv). This is quite a complex graph. We’ll go through creating it step-by-step, but let’s first look at the end result:</p>
+<p><img src="files/week12/wellbeingByScreentime.png" class="img-fluid"></p>
+<p>Ok, that’s what we are working towards.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Below, a chunk of code is presented. It is your task to fill in the x and y variables.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Go back to the research question - which variable is for the x axis and for the y axis?</p>
+</div>
+</div>
+</div>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-4_59fc9ab585c86aec254a765dd2eadf1a">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_means, <span class="fu">aes</span>(<span class="at">x =</span> , <span class="at">y =</span> )) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>QUESTION 4b</strong>: What research question does this plot describe? Is it appropriate for the levels within the data?</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Now, let’s add a different linetype for each day (weekday vs.&nbsp;weekend). Fill in the blanks in the code below.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-5_c02dd6b41a66fccef1104cb568c9b87d">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_means, <span class="fu">aes</span>(<span class="at">x =</span> , <span class="at">y =</span> , <span class="at">linetype =</span> )) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>QUESTION 4c</strong>: What research question does this plot describe? Is it appropriate for the levels within the data?</p>
+<p>Still not quite there.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Fill in the blanks (for x, y and linetype) as before. Now have a good look at the code below. What has changed? Copy the code to your script and run it. Then, for each line write a sentence as a comment to describe its effect on the plot.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-6_74d4f6dbafdf3513a1dc7a715736d5ae">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat_means, <span class="fu">aes</span>(<span class="at">x =</span> , <span class="at">y =</span> , <span class="at">linetype =</span> )) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>variable, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We add the <code>facet_wrap()</code> function here. You can check the <code>?facet_wrap()</code> help page for more information.</p>
+<p><strong>QUESTION 4d</strong>: c.&nbsp;What does the <code>facet_wrap()</code> function do? Is this plot appropriate for the levels in the data?</p>
+</section>
+<section id="step-5-calculating-mean-hours-per-day-for-smartphone-use-for-each-participant" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-calculating-mean-hours-per-day-for-smartphone-use-for-each-participant">Step 5: Calculating mean hours per day for smartphone use, for each participant</h4>
+<p>As mentioned at the beginning, in today’s lab we’ll focus on smartphone use. So looking at the bottom left of the figure we could suggest that smartphone use of more than 1 hour per day is associated with increasingly negative well-being the longer screen time people have. This looks to be a similar effect for Weekdays and Weekends, though perhaps overall well-being in Weekdays is marginally lower than in Weekends (the line for Weekday is lower on the y-axis than Weekends). This makes some sense as people tend to be happier on Weekends!</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Below is a set of comments that describe what the chunk of code that you need to write next does: #use ‘screen2’ #and then filter out the observations for ‘Using Smartphone’, #and then group together each participant, #and then summarise the mean hours calling it ‘hours_per_day’, #save it in an object called ‘smarttot’</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Now let’s do it the other way around. Run the code below. Have a look at the structure of ‘smart_wb’.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can use the <code>str()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-7_3a4ed8862692b9e4ba2c04634d018e37">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>smart_wb <span class="ot">&lt;-</span> smarttot <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hours_per_day <span class="sc">&gt;</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(wb_tot, <span class="st">"Serial"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(pinfo, <span class="st">"Serial"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sex =</span> <span class="fu">as.factor</span>(sex))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 5a</strong>: What does the code do? Write a short paragraph, using the phrase “and then” to represent the pipes.</p>
+</blockquote>
+</section>
+<section id="step-6-more-visualisation" class="level4">
+<h4 class="anchored" data-anchor-id="step-6-more-visualisation">Step 6: More visualisation</h4>
+<p>We are now using only one small part of the data - smartphone use and its relationship with well-being over different durations of time. Before formally testing our research question, we can visualise the data and enquire about sex differences on the same plot - run each chunk of code below:</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong> To further group the data, copy the code below to your script and run it. Look at the ‘smart_wb_gen’ dataframe. What has the code above done? Write a couple of sentences of description.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-8_ee6f18dbd99365f32761d5be08a298e1">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>smart_wb_gen <span class="ot">&lt;-</span> smart_wb <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(hours_per_day, sex) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_wellbeing =</span> <span class="fu">mean</span>(tot_wellbeing))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Let’s visualise these data.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-9_a563b2ec7796d47faf44e2a29e5ce584">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(smart_wb_gen, <span class="fu">aes</span>(hours_per_day, mean_wellbeing, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_discrete</span>(<span class="at">name =</span> <span class="st">"Sex"</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Girls"</span>, <span class="st">"Boys"</span>))<span class="sc">+</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">name =</span> <span class="st">"Total hours smartphone use"</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">name =</span> <span class="st">"Mean well-being score"</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 6a</strong>: Write an interpretation of the above plot in plain English.</p>
+</blockquote>
+</section>
+<section id="step-7-the-regression-model" class="level4">
+<h4 class="anchored" data-anchor-id="step-7-the-regression-model">Step 7: The regression model</h4>
+<p>In the steps 2 to 6 we’ve covered some pretty heavy-lifting data-wrangling. As it is so often the case that something like this is needed when working with real data, ti is really important to practise this. However, to ensure you also spend time on fitting the regression model and interpreting the output, you can choose to use the data-file <a href="files/week12/smart_wb.csv">smart_wb.csv</a> to get started with that. It contains the data in a format that is the result of all the data-wrangling we did in steps 2 to 6. So, download the <code>smart_sb.csv</code> data-file, put it in the folder that is your working directory and you’re all set for running the regression model.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+If you couldn’t upload files to the server, do this:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you experienced difficulties with uploading a folder or a file to the server, you can use the code below to directly download the file you need in this lab activity to the server (instead of first downloading it to you computer and then uploading it to the server). Remember that you can copy the code to your clipboard by clicking on the ‘clipboard’ in the top right corner.</p>
+</div>
+</div>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-10_67ef97ba5e45b94edaf3574881c20d81">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://github.com/mg78/2324_PSYC402/blob/main/data/week12/smart_wb.csv?raw=true"</span>, <span class="at">destfile =</span> <span class="st">"smart_wb.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Let’s run the regression. Write code in your script in which you call your output ‘mod’, and use the data ‘smart_wb’ using the following formula, <code>lm(y ~ x1 + x2 + x1:x2, data)</code> to construct your regression model. Go back to the research question for your outcome and two predictor variables.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the following template:</p>
+<pre><code>mod &lt;- lm(y ~ x1 + x2 + x1:x2, data)</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>mod &lt;- lm(tot_wellbeing ~ hours_per_day + sex + hours_per_day:sex, smart_wb)</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Call and save the summary of your model as ‘mod_summary’; then have a look at it.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>mod_summary &lt;- summary(mod)
+mod_summary</code></pre>
+</div>
+</div>
+</div>
+<p>Let’s first look at the model as a whole:</p>
+<blockquote class="blockquote">
+<p><strong>QUESTION 7a</strong>: What is the p-value for the overall model? Is it significant? What does this mean?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>QUESTION 7b</strong>: To two decimal places, what percentage of the variance in well-being scores does the overall model explain?</p>
+</blockquote>
+<p>Now, lets look at the coefficients of our predictors:</p>
+<blockquote class="blockquote">
+<p><strong>QUESTION 7c</strong>: Are the main effects of smartphone use and sex significant?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>QUESTION 7d</strong>: Which variable indicates the interaction between smartphone use and sex?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>QUESTION 7e</strong>: And is the interaction significant?</p>
+</blockquote>
+<blockquote class="blockquote">
+<p><strong>QUESTION 7f</strong>: What is the most reasonable interpretation of these results?</p>
+</blockquote>
+<p>The above model uses <strong>treatment coding</strong> (sometimes called dummy coding), for the sex variable. In a categorical variable with only two levels this means that one level is coded as 0 and the other level is coded as 1. In categorical variables with more than two levels, it works slightly differently.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: We can check that the sex variable is treatment with the following code:</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-11_ca676b1ddf55ecc01dc4aefcd078cc28">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Because we have not explicitly told R about the labels for the sex variable, it has used level 0 as the reference level, hidden within the intercept term and level sex1 describes the difference (or slope) between level 0 and 1 or in this dataset from female to male.</p>
+<blockquote class="blockquote">
+<p><strong>QUESTION 7g</strong>: Is being Male better for a person’s well-being in the context of smartphone use than being Female?</p>
+</blockquote>
+<p>Now let’s look at <strong>deviation coding</strong>. There are other ways to code your categorical variables. One of them is deviation coding (also sometimes called sum coding). This effectively divides the difference of the values between your categorical levels by the number of levels so that each level can be compared to one intercept that is central to them all rather than comparing levels to one reference level. It is like centering for a categorical level.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong> Use the code chunk below to: 1) Add a variable to the smart_wb data that is a deviation coding of sex; 2) Set the deviation coding (we’ll label it ‘Sum’ here for easy variable naming); and 3) Look at the output for the sum-coded sex variable.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-12_6c010dac0096c592b8291d39edefa034">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>smart_wb <span class="ot">&lt;-</span> <span class="fu">mutate</span>(smart_wb, <span class="at">sexSum =</span> sex) <span class="co"># add a variable to the smart_wb data that is a deviation coding of sex</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sexSum) <span class="ot">&lt;-</span> <span class="fu">contr.sum</span>(<span class="dv">2</span>) <span class="co"># wet the deviation coding</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">contrasts</span>(smart_wb<span class="sc">$</span>sexSum) <span class="co"># look at the output for the sum coded sex variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we’ll run the regression again, using the sum-coded sex variable and we’ll compare the outputs.</p>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-13_21e110bc2be42ec6e19ded82e03b7a0f">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the regression model again, using the sumcoded sex model and compare outputs</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>mod_S <span class="ot">&lt;-</span> <span class="fu">lm</span>(tot_wellbeing <span class="sc">~</span> hours_per_day <span class="sc">+</span> sexSum <span class="sc">+</span> hours_per_day<span class="sc">:</span>sexSum, smart_wb)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>mod_S_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(mod_S)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare the two model summary outputs</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>mod_summary</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>mod_S_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>‘sexSum1’ is now the coefficient for sex and represents the change from the intercept value which now lies between the values for being Female and Male. Note how this coefficient is a negative.</p>
+<p>The earlier model had a positive coefficient because the intercept described the reference group of the Girls, who on average begin at a lower well-being level than Boys (refer back to the scatterplot to verify this). Because the sum-coding has moved the intercept to a point that is the center of the difference between Boys and Girls, sexSum1 now describes the distance between the centre and a level of Sex.</p>
+<p>Values for well-being in Girls are thus: Intercept + sexSum<em>+1 49.74 + (-1.61)</em>(+1)</p>
+<p>Values for well-being in Boys are thus: Intercept + sexSum<em>-1 49.74 + (-1.61)</em>(-1)</p>
+<p>with the Boys being higher in well-being…(remember a negative number multiplied by a negative number produces a positive number and a negative number multiplied by a positive number produces a negative number).</p>
+<p>The interpretation of both model effects is the same, and if you look at the summary statistics, they are identical. Deviation coding effectively centers your categorical variables and helps with interpretation of interaction terms.</p>
+</section>
+<section id="step-8-checking-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="step-8-checking-assumptions">Step 8: Checking assumptions</h4>
+<p>Now that we’ve fit a model, let’s check whether it meets the assumptions of linearity, normality and homoscedasticity. With regression models, you do this after you’ve actually fit the model.</p>
+<p><strong>Linearity</strong> Unlike when we did simple regression we can’t use <code>crPlots()</code> to test for linearity when there is an interaction, but we know from looking at the grouped scatterplot that this assumption has been met.</p>
+<p><strong>Normality</strong> Normally we would test for normality with a QQ-plot and a Shapiro-Wilk test. However, because this dataset is so large, the Shapiro-Wilk is not appropriate (if you try to run the test it will produce a warning telling you that the sample size must be between 3 and 5000). This is because with extremely large sample sizes the Shapiro-Wilk test will find that any deviation from normality is significant. Therefore we should judge normality based upon the QQ-plot.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Create a QQ-plot to check the residuals are normally distributed.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can use the <code>qqPlot()</code> function. The residuals are stored in the ‘mod’ object you created earlier.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>qqPlot(mod$residuals)</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 8a</strong>: What do you conclude from the QQ-plot?</p>
+</blockquote>
+<p><strong>Homoscedasticity</strong> Here we have the same problem as with testing for normality: with such a large sample the <code>ncvTest()</code> will produce a significant result for any deviation from homoscedasticity. So we need to rely on plots again. To check for homoscedasticity we can use <code>plot()</code> from Base R that will produce a bunch of helpful plots (more information <a href="https://www.r-bloggers.com/2016/01/how-to-detect-heteroscedasticity-and-rectify-it/"><strong>here</strong>:</a>.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Copy the code chunk below to your script and run it.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-14_ba74fc949f28f028302a4fe69e44708b">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))             <span class="co"># 4 charts in 1 panel</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod)                     <span class="co"># this may take a few seconds to run</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The residuals vs leverage plot shows a flat red line so, whilst it isn’t perfect, we can assume that with such a large sample size regression is still an appropriate analysis.</p>
+<p><strong>Multi-collinearity</strong> Finally, lets check for multicollinearity using the <code>vif()</code> function. Essentially, this function estimates how much the variance of a coefficient is “inflated” because of linear dependence with other predictors, i.e., that a predictor isn’t actually adding any unique variance to the model, it’s just really strongly related to other predictors. Thankfully, vif is not affected by large samples like the other tests. There are various rules of thumb, but most converge on a VIF of above 2 to 2.5 for any one predictor being problematic.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Copy the code chunk below to your script and run it.</p>
+</blockquote>
+<div class="cell" data-hash="Week12_cache/html/unnamed-chunk-15_736b2d4ddf15bf0b639df6b6a6c196dd">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(mod)                      <span class="co"># Check for multi-collinearity</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>QUESTION 8b</strong>: Do any of the predictors show evidence of multicollinearity?</p>
+</blockquote>
+</section>
+<section id="step-9-write-up" class="level4">
+<h4 class="anchored" data-anchor-id="step-9-write-up">Step 9: Write up</h4>
+<blockquote class="blockquote">
+<p><strong>QUESTION 9a</strong>: How would you write up the results following APA guidance? You can choose whether you do so for the model using treatment coding or for the model using deviation coding.</p>
+</blockquote>
 </section>
 </section>
 </section>
@@ -546,33 +1092,32 @@ If you have difficulty uploading files to the server
 <p>When you have completed all of the lab content, you may want to check your answers with our completed version of the script for this week. <strong>Remember</strong>, looking at this script (studying/revising it) does not replace the process of working through the lab activities, trying them out for yourself, getting stuck, asking questions, finding solutions, adding your own comments, etc. <strong>Actively engaging</strong> with the material is the way to learn these analysis skills, not by looking at someone else’s completed code…</p>
 <p>The answers to the questions and the script containing the code will be available after the lab session has taken place.</p>
 <!-- You can download the R-script that includes the relevant code here: [402_wk12_labAct1_withAnswers.R](files/week12/402_wk12_labAct1_withAnswers.R). -->
-<!-- ### Lab activity 1: Combining a continuous and a categorical predictor in a resssion model -->
+<!-- ### Lab activity 1: Combining a continuous and a categorical predictor in a regression model -->
 
-<!-- 1. In which table is the variable corresponding to sex located and what is this variable called? **In `pinfo`; the variable is called `sex`.** -->
-<!-- 2. In what format is the well-being data (long or wide)? On how many participants does it include observations? And on how many items for each participant? **The well-being data are in 'wide' format. It contains observations on 102580 participants, on 14 items.** -->
-<!-- 3. What is the name of the variable that identifies individual participants in this dataset? It is important to work this out as this variable will allow us to link information across the three data files. **`Serial`** -->
-<!-- 4. Is the distribution of well-being scores symmetrical, negatively skewed or positively skewed? **Negatively skewed** -->
-<!-- 5. What are the variables and the levels or conditions within each variable of screen2? -->
+<!-- 2a. In which table is the variable corresponding to sex located and what is this variable called? **In `pinfo`; the variable is called `sex`.** -->
+<!-- 2b. In what format is the well-being data (long or wide)? On how many participants does it include observations? And on how many items for each participant? **The well-being data are in 'wide' format. It contains observations on 102580 participants, on 14 items.** -->
+<!-- 2c. What is the name of the variable that identifies individual participants in this dataset? It is important to work this out as this variable will allow us to link information across the three data files. **`Serial`** -->
+<!-- 3a. Is the distribution of well-being scores symmetrical, negatively skewed or positively skewed? **Negatively skewed** -->
+<!-- 4a. What are the variables and the levels or conditions within each variable of screen2? -->
 <!-- **Participants plus:** -->
 <!-- **Levels:  variables = 4:  watching tv, playing video games, using computers, using smartphone** -->
 <!--          **day = 2 = weekdays, weekends** -->
 <!--          **hours = 9 = 0, 0.5, 1 - 7** -->
-<!-- 6. -->
-<!-- + a. What research question does this plot describe? Is it appropriate for the levels within the data? **The plot describes how hours of use impact upon well-being? No, it is too broad a research question.** -->
-<!-- + b. What research question would fit this visualisation?Is it appropriate for the levels in the data? **The hours are now displayed by weekdays and weekends. How do hours of screen time impact on well-being on weekdays and at the weekend? No, it is still too broad.** -->
-<!-- + c. What does the `facet_wrap()` function do? Is this plot appropriate for the levels in the data? **The `facet_wrap()` function has split the types of screen time and shown how hours of use across weekdays and weekends impact upon well-being. This captures the levels of information within the dataset.** -->
-<!-- 7. *See the script* -->
-<!-- 8. Write an interpretation of the above plot in plain English. **Something along the lines of: Adolescent girls show lower overall well-being compared to adolescent boys. In addition, the slope for girls appears more negative than that for boys; the one for boys appears relatively flat. This suggests that the negative association between well-being and smartphone use is stronger for girls.** -->
-<!-- 9. What is the p-value for the overall model? Is it significant? What does this mean? **The p-value for the overall model fit is < 2.2e-16. This significant. It means that together the predictors describe the variance in well-being better than a model without the predictors (the null model). So knowing something about smartphone use and sex of participants will allow us to predict their well-being to a degree.** -->
-<!-- 10. To two decimal places, what percentage of the variance in well-being scores does the overall model explain? **9.38%** -->
-<!-- 11. Are the main effects of smartphone use and sex significant? **Yes.** -->
-<!-- 12. Which variable indicates the interaction between smartphone use and sex? **The interaction is indicated by the variable hours_per_day:sex.** -->
-<!-- 13. And is the interaction significant? **Yes.** -->
-<!-- 14. What is the most reasonable interpretation of these results? **Smartphone use was more negatively associated with well-being for girls than for boys.** -->
-<!-- 15. Is being Male better for a person's well-being in the context of smartphone use than being Female? **Yes.** -->
-<!-- 16. What do you conclude from the QQ-plot? **The residuals are normally distributed.** -->
-<!-- 17. Do any of the predictors show evidence of multicollinearity? **Yes, Boys and the interaction do. We'll talk about that more, later in the module.** -->
-<!-- 18. Write up -->
+<!-- 4b.  What research question does this plot describe? Is it appropriate for the levels within the data? **The plot describes how hours of use impact upon well-being? No, it is too broad a research question.** -->
+<!-- 4c.  What research question would fit this visualisation?Is it appropriate for the levels in the data? **The hours are now displayed by weekdays and weekends. How do hours of screen time impact on well-being on weekdays and at the weekend? No, it is still too broad.** -->
+<!-- 4d.  What does the `facet_wrap()` function do? Is this plot appropriate for the levels in the data? **The `facet_wrap()` function has split the types of screen time and shown how hours of use across weekdays and weekends impact upon well-being. This captures the levels of information within the dataset.** -->
+<!-- 5a. *See the script* -->
+<!-- 6a. Write an interpretation of the above plot in plain English. **Something along the lines of: Adolescent girls show lower overall well-being compared to adolescent boys. In addition, the slope for girls appears more negative than that for boys; the one for boys appears relatively flat. This suggests that the negative association between well-being and smartphone use is stronger for girls.** -->
+<!-- 7a.   What is the p-value for the overall model? Is it significant? What does this mean? **The p-value for the overall model fit is < 2.2e-16. This significant. It means that together the predictors describe the variance in well-being better than a model without the predictors (the null model). So knowing something about smartphone use and sex of participants will allow us to predict their well-being to a degree.** -->
+<!-- 7b.  To two decimal places, what percentage of the variance in well-being scores does the overall model explain? **9.38%** -->
+<!-- 7c.   Are the main effects of smartphone use and sex significant? **Yes.** -->
+<!-- 7d.   Which variable indicates the interaction between smartphone use and sex? **The interaction is indicated by the variable hours_per_day:sex.** -->
+<!-- 7e.   And is the interaction significant? **Yes.** -->
+<!-- 7f.   What is the most reasonable interpretation of these results? **Smartphone use was more negatively associated with well-being for girls than for boys.** -->
+<!-- 7g.   Is being Male better for a person's well-being in the context of smartphone use than being Female? **Yes.** -->
+<!-- 8a. What do you conclude from the QQ-plot? **The residuals are normally distributed.** -->
+<!-- 8b. Do any of the predictors show evidence of multicollinearity? **Yes, Boys and the interaction do. We'll talk about that more, later in the module.** -->
+<!-- 9. Write up -->
 <!-- **Treatment / dummy coded model** -->
 <!-- Treatment coding was used for categorical predictors with the Girls level acting as the reference group. The results of the regression indicated that the model significantly predicted well-being (*F*(3, 71029) = 2450.89, *p* < .001, Adjusted R2 = 0.09), accounting for 9% of the variance.Total hours of smart phone use was a significant negative predictor of well-being scores (*β* = -0.77, *p* < .001, as was sex (*β* = 3.22, *p* < .001), with girls having lower well-being scores than boys. Importantly, there was a significant interaction between screen time and sex (*β* = 0.45, *p* < .001): smartphone use was more negatively associated with well-being for girls than for boys. -->
 <!-- **Deviation / sum coded model** -->
