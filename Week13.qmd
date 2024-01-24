@@ -43,10 +43,10 @@ Another great resource they provide are the 'cheatsheets': one-page overviews of
 
 > **TASK** Explore the cheatsheets linked to below. The ones for `RStudio IDE`, `dplyr`, and `ggplot2` are most relevant to the work we've been doing.
 
-[**Overview of all cheatsheets (incl. translations)**](https://posit.co/resources/cheatsheets/)
-[**Cheatsheet for RStudio IDE**](https://rstudio.github.io/cheatsheets/html/rstudio-ide.html?_gl=1*clcfrv*_ga*MjEyNjQ2Nzk4MC4xNzA1NTg2MzI1*_ga_2C0WZ1JHG0*MTcwNjEyNjcxOS44LjEuMTcwNjEyNzI5OS4wLjAuMA..)
-[**Cheatsheet for `dplyr`**](https://rstudio.github.io/cheatsheets/html/data-transformation.html?_gl=1*py61n2*_ga*MjEyNjQ2Nzk4MC4xNzA1NTg2MzI1*_ga_2C0WZ1JHG0*MTcwNjEyNjcxOS44LjEuMTcwNjEyNzI5OS4wLjAuMA..)
-[**Cheatsheet for `ggplot2`**](https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*8x83jk*_ga*MjEyNjQ2Nzk4MC4xNzA1NTg2MzI1*_ga_2C0WZ1JHG0*MTcwNjEyNjcxOS44LjEuMTcwNjEyNzUwMS4wLjAuMA..)
+* [**Overview of all cheatsheets**](https://posit.co/resources/cheatsheets/)
+* [**Cheatsheet for RStudio IDE**](https://rstudio.github.io/cheatsheets/html/rstudio-ide.html?_gl=1*clcfrv*_ga*MjEyNjQ2Nzk4MC4xNzA1NTg2MzI1*_ga_2C0WZ1JHG0*MTcwNjEyNjcxOS44LjEuMTcwNjEyNzI5OS4wLjAuMA..)
+* [**Cheatsheet for `dplyr`**](https://rstudio.github.io/cheatsheets/html/data-transformation.html?_gl=1*py61n2*_ga*MjEyNjQ2Nzk4MC4xNzA1NTg2MzI1*_ga_2C0WZ1JHG0*MTcwNjEyNjcxOS44LjEuMTcwNjEyNzI5OS4wLjAuMA..)
+* [**Cheatsheet for `ggplot2`**](https://rstudio.github.io/cheatsheets/html/data-visualization.html?_gl=1*8x83jk*_ga*MjEyNjQ2Nzk4MC4xNzA1NTg2MzI1*_ga_2C0WZ1JHG0*MTcwNjEyNjcxOS44LjEuMTcwNjEyNzUwMS4wLjAuMA..)
 
 ### Pre-lab activity 2: Getting ready for the lab class
 
