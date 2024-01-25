@@ -283,6 +283,12 @@ It is useful to have a quick look at the bivariate correlations between the vari
 > **TASK**: Add the code below to your script and check you understand what each line does.
 
 ```{r eval=FALSE}
+beauty_matrix <- beauty_z %>%
+  select(eval, age_z, beauty_z) %>% # only keep relevant variables
+  as.data.frame() # tell R it is a specific type of data frame (needed for the correlate() function)
+
+pairs(beauty_matrix) # make multiple scatterplots in one go
+
 intercor_results <- correlate(x = beauty_matrix, # our data
                               test = TRUE, # compute p-values
                               corr.method = "pearson", # run a spearman test 
@@ -376,7 +382,9 @@ But it might be more useful to plot different regression lines for different val
 * average (between 41 and 53)
 * oldest (54 and older).
 
-We can do this by using the `mutate()` function, in combination with the `cut()` function. There is a 'recipe' for this on the Posit website.
+We can do this by using the `mutate()` function, in combination with the `cut()` function. There is a 'recipe' for this on the Posit website:
+
+* `cut()` - group continuous variable into categories - [**recipe**](https://posit.cloud/learn/recipes/transform/TransformM)
 
 > **TASK**: Read through the recipe mentioned above. Working through the example will be particularly helpful. Write the code to create the categories mentioned above.
 
@@ -384,10 +392,16 @@ We can do this by using the `mutate()` function, in combination with the `cut()`
 ## Hint
 Fill in the relevant bits in the code template below:
 ```
+  mutate(NEW VARIABLE = cut(
+    CONTINUOUS VARIABLE,
+    breaks = c(DEFINE BREAK POINTS),
+    labels = c(ADD LABELS FOR BREAK POINTS)
+    )
+  )
 ```
 :::
 
-::{.callout-tip collapse="true"}
+:::{.callout-tip collapse="true"}
 ## Code
 ```
 beauty_z_ageCat <- beauty_z %>%

@@ -79,6 +79,18 @@ ggplot(beauty_z, aes(x = age_z, y = eval)) +
   geom_smooth(method = "lm", se = TRUE) +
   theme_bw()
 
+# Intercorrelations
+beauty_matrix <- beauty_z %>%
+  select(eval, age_z, beauty_z) %>% # only keep relevant variables
+  as.data.frame() # tell R it is a specific type of data frame (needed for the correlate() function)
+
+pairs(beauty_matrix) # make multiple scatterplots in one go
+
+intercor_results <- correlate(x = beauty_matrix, # our data
+                              test = TRUE, # compute p-values
+                              corr.method = "pearson", # run a spearman test 
+                              p.adjust.method = "bonferroni") # use the bonferroni correction
+intercor_results
 
 # Step 5: The regression model  ------------------------------------------------------------------
 

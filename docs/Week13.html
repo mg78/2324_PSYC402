@@ -644,12 +644,18 @@ ggplot(beauty_z, aes(x = age_z, y = eval)) +
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Add the code below to your script and check you understand what each line does.</p>
 </blockquote>
-<div class="cell" data-hash="Week13_cache/html/unnamed-chunk-2_cfb108aa9fc51475a01f8727d95129ec">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>intercor_results <span class="ot">&lt;-</span> <span class="fu">correlate</span>(<span class="at">x =</span> beauty_matrix, <span class="co"># our data</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">test =</span> <span class="cn">TRUE</span>, <span class="co"># compute p-values</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">corr.method =</span> <span class="st">"pearson"</span>, <span class="co"># run a spearman test </span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>) <span class="co"># use the bonferroni correction</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>intercor_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Week13_cache/html/unnamed-chunk-2_8df52f56c15188c5f7ba731638572b2a">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>beauty_matrix <span class="ot">&lt;-</span> beauty_z <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(eval, age_z, beauty_z) <span class="sc">%&gt;%</span> <span class="co"># only keep relevant variables</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="co"># tell R it is a specific type of data frame (needed for the correlate() function)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pairs</span>(beauty_matrix) <span class="co"># make multiple scatterplots in one go</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>intercor_results <span class="ot">&lt;-</span> <span class="fu">correlate</span>(<span class="at">x =</span> beauty_matrix, <span class="co"># our data</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                              <span class="at">test =</span> <span class="cn">TRUE</span>, <span class="co"># compute p-values</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">corr.method =</span> <span class="st">"pearson"</span>, <span class="co"># run a spearman test </span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>                              <span class="at">p.adjust.method =</span> <span class="st">"bonferroni"</span>) <span class="co"># use the bonferroni correction</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>intercor_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>After you’ve run this code, look at the output in the console. It creates three tables, one with correlation coefficients, one with p-values for these coefficients and one with sample sizes.</p>
 </section>
@@ -805,7 +811,10 @@ Hint
 <li>average (between 41 and 53)</li>
 <li>oldest (54 and older).</li>
 </ul>
-<p>We can do this by using the <code>mutate()</code> function, in combination with the <code>cut()</code> function. There is a ‘recipe’ for this on the Posit website.</p>
+<p>We can do this by using the <code>mutate()</code> function, in combination with the <code>cut()</code> function. There is a ‘recipe’ for this on the Posit website:</p>
+<ul>
+<li><code>cut()</code> - group continuous variable into categories - <a href="https://posit.cloud/learn/recipes/transform/TransformM"><strong>recipe</strong></a></li>
+</ul>
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Read through the recipe mentioned above. Working through the example will be particularly helpful. Write the code to create the categories mentioned above.</p>
 </blockquote>
@@ -822,11 +831,27 @@ Hint
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Fill in the relevant bits in the code template below:</p>
-<pre><code></code></pre>
+<pre><code>  mutate(NEW VARIABLE = cut(
+    CONTINUOUS VARIABLE,
+    breaks = c(DEFINE BREAK POINTS),
+    labels = c(ADD LABELS FOR BREAK POINTS)
+    )
+  )</code></pre>
 </div>
 </div>
 </div>
-<p>::{.callout-tip collapse=“true”} ## Code</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <pre><code>beauty_z_ageCat &lt;- beauty_z %&gt;%
   mutate(ageCat = cut(
     age,
@@ -834,7 +859,9 @@ Hint
     labels = c("youngest","average","oldest")
     )
   )</code></pre>
-<p>:::</p>
+</div>
+</div>
+</div>
 <p>Now let’s create a single plot with three different lines, one for each of the age groups created above.</p>
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Copy the code below to your script and make sure you understand what it does.</p>
@@ -857,7 +884,7 @@ Hint
 <p><strong>TASK</strong>: Create a qq-plot to check the residuals are normally distributed.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -866,14 +893,14 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-25" class="callout-25-contents callout-collapse collapse">
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Use the <code>qqPlot()</code> function; mind the capital P.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -882,7 +909,7 @@ Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>qqPlot(mod_int$residuals)</code></pre>
 </div>
@@ -904,7 +931,7 @@ Code
 <p><strong>TASK</strong>: Use the <code>vif()</code> function to test for multi-collinearity.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -913,7 +940,7 @@ Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>vif(mod_int)   </code></pre>
 </div>
@@ -923,7 +950,7 @@ Code
 <p>Finally, we need to write up the results.</p>
 <p><strong>QUESTION 12</strong>: Can you write up the results of the regression analysis following APA guidelines?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -932,7 +959,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-28" class="callout-28-contents callout-collapse collapse">
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Don’t forget to mention and interpret the interaction effect.</p>
 </div>
