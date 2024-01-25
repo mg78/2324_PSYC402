@@ -799,50 +799,15 @@ Hint
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Beauty score"</span>, <span class="at">y =</span> <span class="st">"Teaching evaluation score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>But it might be more useful to plot different regression lines for different values of age. We can do this be transforming age into a categorical variable for plotting purposes. The code below creates three categories, based on eye-balling the histogram for age:</p>
+<p>But it might be more useful to plot different regression lines for different values of age. We can do this be transforming age into a categorical variable for plotting purposes. We want to create three categories, based on eye-balling the histogram for age:</p>
 <ul>
 <li>youngest (40 and younger)</li>
 <li>average (between 41 and 53)</li>
 <li>oldest (54 and older).</li>
 </ul>
+<p>We can do this by using the <code>mutate()</code> function, in combination with the <code>cut()</code> function. There is a ‘recipe’ for this on the Posit website.</p>
 <blockquote class="blockquote">
-<p><strong>TASK</strong>: Copy the code below to your script and make sure you understand what it does.</p>
-</blockquote>
-<div class="cell" data-hash="Week13_cache/html/unnamed-chunk-4_9856d52303943784ceccefc36aae4bb4">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>oldest <span class="ot">&lt;-</span> beauty_z <span class="sc">%&gt;%</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;=</span> <span class="dv">54</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>average <span class="ot">&lt;-</span> beauty_z <span class="sc">%&gt;%</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">40</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&lt;</span> <span class="dv">54</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>youngest <span class="ot">&lt;-</span> beauty_z <span class="sc">%&gt;%</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&lt;=</span> <span class="dv">40</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Now let’s create a single plot with three different lines, one for each of the age groups created above.</p>
-<blockquote class="blockquote">
-<p><strong>TASK</strong>: Copy the code below to your script and make sure you understand what it does.</p>
-</blockquote>
-<div class="cell" data-hash="Week13_cache/html/unnamed-chunk-5_6b42b093ca717ebdf42a54358329877f">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> oldest, <span class="fu">aes</span>(<span class="at">x =</span> beauty_z, <span class="at">y =</span> eval), <span class="at">colour =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> oldest, <span class="fu">aes</span>(<span class="at">x =</span> beauty_z, <span class="at">y =</span> eval), <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">colour =</span> <span class="st">'blue'</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> average, <span class="fu">aes</span>(<span class="at">x =</span> beauty_z, <span class="at">y =</span> eval), <span class="at">colour =</span> <span class="st">'black'</span>) <span class="sc">+</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> average, <span class="fu">aes</span>(<span class="at">x =</span> beauty_z, <span class="at">y =</span> eval), <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">colour =</span> <span class="st">'black'</span>) <span class="sc">+</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> youngest, <span class="fu">aes</span>(<span class="at">x =</span> beauty_z, <span class="at">y =</span> eval), <span class="at">colour =</span> <span class="st">'green'</span>) <span class="sc">+</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">data =</span> youngest, <span class="fu">aes</span>(<span class="at">x =</span> beauty_z, <span class="at">y =</span> eval), <span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>, <span class="at">colour =</span> <span class="st">'green'</span>) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Beauty score"</span>, <span class="at">y =</span> <span class="st">"Teaching evaluation score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The line for the oldest participants seems much steeper than for the other two groups, suggesting that the interaction between age and beauty is mostly driven by older participants who have received more extreme beauty scores.</p>
-</section>
-<section id="step-6-checking-assumptions" class="level4">
-<h4 class="anchored" data-anchor-id="step-6-checking-assumptions">Step 6: Checking assumptions</h4>
-<p>Now that we’ve fitted a model, let’s check whether it meets the assumptions of linearity, normality and homoscedasticity.</p>
-<p><strong>Linearity</strong> Unlike when we did simple regression we can’t use <code>crPlots()</code> to test for linearity when there is an interaction, but we know from looking at the grouped scatterplot that this assumption has been met.</p>
-<p><strong>Normality</strong> Normally we would test for normality with a qq-plot and a Shapiro-Wilk test. However, because this dataset is so large, the Shapiro-Wilk is not appropriate (if you try to run the test it will produce a warning telling you that the sample size must be between 3 and 5000). This is because with extremely large sample sizes the Shapiro-Wilk test will find that any deviation from normality is significant. Therefore we should judge normality based upon the qq-plot.</p>
-<blockquote class="blockquote">
-<p><strong>TASK</strong>: Create a qq-plot to check the residuals are normally distributed.</p>
+<p><strong>TASK</strong>: Read through the recipe mentioned above. Working through the example will be particularly helpful. Write the code to create the categories mentioned above.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-24-contents" aria-controls="callout-24" aria-expanded="false" aria-label="Toggle callout">
@@ -856,41 +821,57 @@ Hint
 </div>
 <div id="callout-24" class="callout-24-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Use the <code>qqPlot()</code> function; mind the capital P.</p>
+<p>Fill in the relevant bits in the code template below:</p>
+<pre><code></code></pre>
 </div>
 </div>
 </div>
+<p>::{.callout-tip collapse=“true”} ## Code</p>
+<pre><code>beauty_z_ageCat &lt;- beauty_z %&gt;%
+  mutate(ageCat = cut(
+    age,
+    breaks = c(0, 40, 54, Inf),
+    labels = c("youngest","average","oldest")
+    )
+  )</code></pre>
+<p>:::</p>
+<p>Now let’s create a single plot with three different lines, one for each of the age groups created above.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Copy the code below to your script and make sure you understand what it does.</p>
+</blockquote>
+<div class="cell" data-hash="Week13_cache/html/unnamed-chunk-4_0b50bba5bfb1999091bb820d900f5700">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> beauty_z_ageCat, <span class="fu">aes</span>(<span class="at">x =</span> beauty_z, <span class="at">y =</span> eval, <span class="at">colour =</span> ageCat)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Beauty score"</span>, <span class="at">y =</span> <span class="st">"Teaching evaluation score"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The line for the oldest participants seems much steeper than for the other two groups, suggesting that the interaction between age and beauty is mostly driven by older participants who have received more extreme beauty scores.</p>
+</section>
+<section id="step-6-checking-assumptions" class="level4">
+<h4 class="anchored" data-anchor-id="step-6-checking-assumptions">Step 6: Checking assumptions</h4>
+<p>Now that we’ve fitted a model, let’s check whether it meets the assumptions of linearity, normality and homoscedasticity.</p>
+<p><strong>Linearity</strong> Unlike when we did simple regression we can’t use <code>crPlots()</code> to test for linearity when there is an interaction, but we know from looking at the grouped scatterplot that this assumption has been met.</p>
+<p><strong>Normality</strong> Normally we would test for normality with a qq-plot and a Shapiro-Wilk test. However, because this dataset is so large, the Shapiro-Wilk is not appropriate (if you try to run the test it will produce a warning telling you that the sample size must be between 3 and 5000). This is because with extremely large sample sizes the Shapiro-Wilk test will find that any deviation from normality is significant. Therefore we should judge normality based upon the qq-plot.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Create a qq-plot to check the residuals are normally distributed.</p>
+</blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-25-contents" aria-controls="callout-25" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Code
+Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
 <div id="callout-25" class="callout-25-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<pre><code>qqPlot(mod_int$residuals)</code></pre>
+<p>Use the <code>qqPlot()</code> function; mind the capital P.</p>
 </div>
 </div>
 </div>
-<p><strong>QUESTION 9</strong>: What do you conclude from the qq-plot?</p>
-<p><strong>Homoscedasticity</strong> Here we have the same problem as with testing for normality: with such a large sample the <code>ncvTest()</code> will produce a significant result for any deviation from homoscedasticity. So we need to rely on plots again.</p>
-<p>To check for homoscedasticity we can use <code>plot()</code> from Base R that will produce a bunch of helpful plots (more information [<strong>here</strong>] (https://www.r-bloggers.com/2016/01/how-to-detect-heteroscedasticity-and-rectify-it/).</p>
-<blockquote class="blockquote">
-<p><strong>TASK</strong>: Copy the code below to your script and run it to create the plots</p>
-</blockquote>
-<div class="cell" data-hash="Week13_cache/html/unnamed-chunk-6_794ab573a0e4ce147a03dbd33a0ea364">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))                 <span class="co"># 4 charts in 1 panel</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_int)                     <span class="co"># this may take a few seconds to run</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><strong>QUESTION 10</strong>: What do you conclude from the residuals vs leverage plot?</p>
-<p><strong>Multi-collinearity</strong> Now let’s check for multi-collinearity using the <code>vif()</code> function. Essentially, this function estimates how much the variance of a coefficient is “inflated” because of linear dependence with other predictors, i.e., that a predictor isn’t actually adding any unique variance to the model, it’s just really strongly related to other predictors. Thankfully, the <code>vif()</code> function is not affected by large samples like the other tests. There are various rules of thumb, but most converge on a VIF of above 2 - 2.5 for any one predictor being problematic.</p>
-<blockquote class="blockquote">
-<p><strong>TASK</strong>: Use the <code>vif()</code> function to test for multi-collinearity.</p>
-</blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -903,6 +884,37 @@ Code
 </div>
 <div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<pre><code>qqPlot(mod_int$residuals)</code></pre>
+</div>
+</div>
+</div>
+<p><strong>QUESTION 9</strong>: What do you conclude from the qq-plot?</p>
+<p><strong>Homoscedasticity</strong> Here we have the same problem as with testing for normality: with such a large sample the <code>ncvTest()</code> will produce a significant result for any deviation from homoscedasticity. So we need to rely on plots again.</p>
+<p>To check for homoscedasticity we can use <code>plot()</code> from Base R that will produce a bunch of helpful plots (more information [<strong>here</strong>] (https://www.r-bloggers.com/2016/01/how-to-detect-heteroscedasticity-and-rectify-it/).</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Copy the code below to your script and run it to create the plots</p>
+</blockquote>
+<div class="cell" data-hash="Week13_cache/html/unnamed-chunk-5_79c9ff2b512cc3dc75106432b2795755">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))                 <span class="co"># 4 charts in 1 panel</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(mod_int)                     <span class="co"># this may take a few seconds to run</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>QUESTION 10</strong>: What do you conclude from the residuals vs leverage plot?</p>
+<p><strong>Multi-collinearity</strong> Now let’s check for multi-collinearity using the <code>vif()</code> function. Essentially, this function estimates how much the variance of a coefficient is “inflated” because of linear dependence with other predictors, i.e., that a predictor isn’t actually adding any unique variance to the model, it’s just really strongly related to other predictors. Thankfully, the <code>vif()</code> function is not affected by large samples like the other tests. There are various rules of thumb, but most converge on a VIF of above 2 - 2.5 for any one predictor being problematic.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Use the <code>vif()</code> function to test for multi-collinearity.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <pre><code>vif(mod_int)   </code></pre>
 </div>
 </div>
@@ -911,7 +923,7 @@ Code
 <p>Finally, we need to write up the results.</p>
 <p><strong>QUESTION 12</strong>: Can you write up the results of the regression analysis following APA guidelines?</p>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-28-contents" aria-controls="callout-28" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -920,7 +932,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-27" class="callout-27-contents callout-collapse collapse">
+<div id="callout-28" class="callout-28-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Don’t forget to mention and interpret the interaction effect.</p>
 </div>

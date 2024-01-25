@@ -79,12 +79,6 @@ ggplot(beauty_z, aes(x = age_z, y = eval)) +
   geom_smooth(method = "lm", se = TRUE) +
   theme_bw()
 
-# Correlations between variables
-intercor_results <- correlate(x = beauty_matrix, # our data
-                              test = TRUE, # compute p-values
-                              corr.method = "pearson", # run a spearman test 
-                              p.adjust.method = "bonferroni") # use the bonferroni correction
-intercor_results
 
 # Step 5: The regression model  ------------------------------------------------------------------
 
@@ -125,23 +119,17 @@ ggplot(data = beauty_z, aes(x = beauty_z, y = eval, colour = age_z)) +
 # - average (between 41 and 53)
 # - oldest (54 and older).
 
-oldest <- beauty_z %>%
-  filter(age >= 54)
+beauty_z_ageCat <- beauty_z %>%
+  mutate(ageCat = cut(
+    age,
+    breaks = c(0, 40, 54, Inf),
+    labels = c("youngest","average","oldest")
+    )
+  )
 
-average <- beauty_z %>%
-  filter(age > 40) %>%
-  filter(age < 54)
-
-youngest <- beauty_z %>%
-  filter(age <= 40)
-
-ggplot() +
-  geom_point(data = oldest, aes(x = beauty_z, y = eval), colour = 'blue') +
-  geom_smooth(data = oldest, aes(x = beauty_z, y = eval), method = "lm", se = TRUE, colour = 'blue') +
-  geom_point(data = average, aes(x = beauty_z, y = eval), colour = 'black') +
-  geom_smooth(data = average, aes(x = beauty_z, y = eval), method = "lm", se = TRUE, colour = 'black') +
-  geom_point(data = youngest, aes(x = beauty_z, y = eval), colour = 'green') +
-  geom_smooth(data = youngest, aes(x = beauty_z, y = eval), method = "lm", se = TRUE, colour = 'green') +
+ggplot(data = beauty_z_ageCat, aes(x = beauty_z, y = eval, colour = ageCat)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
   theme_bw() +
   labs(x = "Beauty score", y = "Teaching evaluation score")
 

@@ -370,38 +370,44 @@ ggplot(data = beauty_z, aes(x = beauty_z, y = eval, colour = age_z)) +
   labs(x = "Beauty score", y = "Teaching evaluation score")
 ```
 
-But it might be more useful to plot different regression lines for different values of age. We can do this be transforming age into a categorical variable for plotting purposes. The code below creates three categories, based on eye-balling the histogram for age:
+But it might be more useful to plot different regression lines for different values of age. We can do this be transforming age into a categorical variable for plotting purposes. We want to create three categories, based on eye-balling the histogram for age:
 
 * youngest (40 and younger)
 * average (between 41 and 53)
 * oldest (54 and older).
 
-> **TASK**: Copy the code below to your script and make sure you understand what it does.
+We can do this by using the `mutate()` function, in combination with the `cut()` function. There is a 'recipe' for this on the Posit website.
 
-```{r eval=FALSE}
-oldest <- beauty_z %>%
-  filter(age >= 54)
+> **TASK**: Read through the recipe mentioned above. Working through the example will be particularly helpful. Write the code to create the categories mentioned above.
 
-average <- beauty_z %>%
-  filter(age > 40) %>%
-  filter(age < 54)
-
-youngest <- beauty_z %>%
-  filter(age <= 40)
+:::{.callout-tip collapse="true"}
+## Hint
+Fill in the relevant bits in the code template below:
 ```
+```
+:::
+
+::{.callout-tip collapse="true"}
+## Code
+```
+beauty_z_ageCat <- beauty_z %>%
+  mutate(ageCat = cut(
+    age,
+    breaks = c(0, 40, 54, Inf),
+    labels = c("youngest","average","oldest")
+    )
+  )
+```
+:::
 
 Now let's create a single plot with three different lines, one for each of the age groups created above.
 
 > **TASK**: Copy the code below to your script and make sure you understand what it does.
 
 ```{r eval=FALSE}
-ggplot() +
-  geom_point(data = oldest, aes(x = beauty_z, y = eval), colour = 'blue') +
-  geom_smooth(data = oldest, aes(x = beauty_z, y = eval), method = "lm", se = TRUE, colour = 'blue') +
-  geom_point(data = average, aes(x = beauty_z, y = eval), colour = 'black') +
-  geom_smooth(data = average, aes(x = beauty_z, y = eval), method = "lm", se = TRUE, colour = 'black') +
-  geom_point(data = youngest, aes(x = beauty_z, y = eval), colour = 'green') +
-  geom_smooth(data = youngest, aes(x = beauty_z, y = eval), method = "lm", se = TRUE, colour = 'green') +
+ggplot(data = beauty_z_ageCat, aes(x = beauty_z, y = eval, colour = ageCat)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
   theme_bw() +
   labs(x = "Beauty score", y = "Teaching evaluation score")
 ```
