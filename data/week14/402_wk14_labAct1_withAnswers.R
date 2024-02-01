@@ -1,4 +1,4 @@
-# PSYC402: Week 15 - Lab activities
+# PSYC402: Week 14 - Lab activity 1
 
 # Our research question: Is gesture perception associated with different aspects of
 # hand shape?
@@ -16,7 +16,7 @@ library(broom)
 # a look at the data file.
 # HINT: Use the read_csv() and head() functions.
 
-ges <- read_csv('hassemer_winter_2016_gesture.csv')
+ges <- read_csv("hassemer_winter_2016_gesture.csv")
 
 
 # Step 2: Descriptive statistics ------------------------------------------
