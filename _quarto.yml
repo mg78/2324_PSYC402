@@ -23,7 +23,11 @@ website:
         file: Week11.qmd
       - text: Week 12
         file: Week12.qmd
-
+      - text: Week 13
+        file: Week13.qmd
+      - text: Week 14
+        file: Week14.qmd
+        
   sidebar:
   
     collapse-level: 1
