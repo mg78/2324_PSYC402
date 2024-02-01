@@ -516,7 +516,7 @@ You can download the R-script that includes the relevant code here: [402_wk13_la
 
 9. What do you conclude from the qq-plot? **The residuals are mostly normally distributed. At the top right (quantile + 3), there are some values that don't quite look normally distributed, this is probably due to fewer data points being available in the highest age bracket. Have a look at a histogram for age. There are a few individuals well above the retirement age, but clearly a lot fewer than in younger age brackets. This basically means that the model does not do a particularly good job for predicting evaluation score at high values of age. As retirement age is quite a natural point to limit the data, you could run the model again, only including people below retirement age, this should give you better behaving residuals. Ideally, you'd pre-register a decision such as this. If you didn't do this prior to data collection, you could still limit the age range included in the final model, but you would need to be transparent in your reporting.**
 
-10. What do you conclude from the residuals vs leverage plot? **The residuals vs leverage plot shows a flat red line so, whilst it isn’t perfect, we can assume that with regression is still an appropriate analysis.
+10. What do you conclude from the residuals vs leverage plot? **The residuals vs leverage plot shows a flat red line so, whilst it isn’t perfect, we can assume that with regression is still an appropriate analysis.**
 
 11. Do any of the predictors show evidence of multi-collinearity? **No**
 
