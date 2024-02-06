@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -176,7 +210,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#pre-lab-activity-2-rainy-days" id="toc-pre-lab-activity-2-rainy-days" class="nav-link" data-scroll-target="#pre-lab-activity-2-rainy-days">Pre-lab activity 2: Rainy days</a></li>
   <li><a href="#pre-lab-activity-3gesture-perception" id="toc-pre-lab-activity-3gesture-perception" class="nav-link" data-scroll-target="#pre-lab-activity-3gesture-perception">Pre-lab activity 3:Gesture perception</a></li>
   </ul></li>
-  <li><a href="#sec-wk14-lab-activities" id="toc-sec-wk14-lab-activities" class="nav-link" data-scroll-target="#sec-wk14-lab-activities">Lab activities</a></li>
+  <li><a href="#sec-wk14-lab-activities" id="toc-sec-wk14-lab-activities" class="nav-link" data-scroll-target="#sec-wk14-lab-activities">Lab activities</a>
+  <ul class="collapse">
+  <li><a href="#lab-activity-1-more-work-on-gesture-perception" id="toc-lab-activity-1-more-work-on-gesture-perception" class="nav-link" data-scroll-target="#lab-activity-1-more-work-on-gesture-perception">Lab activity 1: More work on gesture perception</a></li>
+  </ul></li>
   <li><a href="#sec-wk14-answers" id="toc-sec-wk14-answers" class="nav-link" data-scroll-target="#sec-wk14-answers">Answers</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mg78/2324_PSYC402/edit/main/Week14.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/mg78/2324_PSYC402/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
@@ -278,149 +315,335 @@ If you have difficulty uploading files to the server
 <li>reporting results for logistic regression following APA guidelines</li>
 </ul>
 <p>More info will be uploaded soon.</p>
-<!-- ### Lab activity 1: More work on gesture perception -->
-<!-- #### Background -->
-<!-- The dataset we’ll be working with is described in section 12.6 of the chapter on logistic regression in Bodo Winter’s book (link under ‘Reading’). In the pre-lab activity, we explored the dataset and fitted a first logistic regression model assessing whether participants’ perception of a gesture (expressed as a categorical decision between a ‘shape’ vs. a ‘height’ interpretation of the gesture) was affected by the extent of ‘pinkie curl’. In this lab activity, we’ll be building on that analysis by: 1) Repeating the analysis with a centered pinkie curl variable, and 2) by adding a second predictor: index_curve. -->
-<!-- Our research question: Is gesture perception associated with different aspects of hand shape? -->
-<!-- #### Step 1: Set up -->
-<!-- ::: {.callout-warning}  -->
-<!-- ## Set your working directory -->
-<!-- The folder you were asked to download under 'Pre-lab activity 3: Getting ready for the lab class' contains the data files we'll need. Make sure you have set your working directory to this folder by right-clicking on it and selecting 'Set as working directory'. -->
-<!-- ::: -->
-<!-- ::: {.callout-warning} -->
-<!-- ## Empty the R environment -->
-<!-- Before you do anything else, when starting a new analysis, it is a good idea to empty the R environment. This prevents objects and variables from previous analyses interfering with the current one. To do this, you can click on the little broom icon in the top right of the Environment pane, or you can use `rm(list=ls())`. -->
-<!-- ::: -->
-<!-- Before we can get started we need to tell R which libraries to use. For this analysis we'll need `broom` and `tidyverse`. -->
-<!-- > **TASK**: Load the relevant libraries. If you are unsure how to do that, you can look at the 'Hint' below for a clue by expanding it. After that, if you are still unsure, you can view the code by expanding the 'Code' section below.  -->
-<!-- ::: {.callout-tip collapse="true"} -->
-<!-- ## Hint -->
-<!-- Use the `library()` function. -->
-<!-- ::: -->
-<!-- ::: {.callout-tip collapse="true"} -->
-<!-- ## Code -->
-<!-- The code to do this is below.  -->
-<!-- ``` -->
-<!-- library(broom) -->
-<!-- library(tidyverse) -->
-<!-- ``` -->
-<!-- ::: -->
-<!-- ::: {.callout-important} -->
-<!-- ## If you couldn't upload files to the server, do this: -->
-<!-- If you experienced difficulties with uploading a folder or a file to the server, you can use the code below to directly download the file you need in this lab activity to the server (instead of first downloading it to you computer and then uploading it to the server). Remember that you can copy the code to your clipboard by clicking on the 'clipboard' in the top right corner. -->
-<!-- ::: -->
-<!-- ```{r eval=FALSE} -->
-<!-- download.file("https://github.com/mg78/2324_PSYC402/blob/main/data/week14/hassemer_winter_2016_gesture.csv?raw=true", destfile = "hassemer_winter_2016_gesture.csv") -->
-<!-- ``` -->
-<!-- > **TASK**: Finally, read in the data file (`hassemer_winter_2016_gesture.csv`), and familiarise yourself with its structure. -->
-<!-- ::: {.callout-tip collapse="true"} -->
-<!-- ## Hint -->
-<!-- Use the `read_csv()` function and the `head()` function. -->
-<!-- ::: -->
-<!-- ::: {.callout-tip collapse="true"} -->
-<!-- ## Code -->
-<!-- The code to do this is below.  -->
-<!-- ``` -->
-<!-- ges <- read_csv("hassemer_winter_2016_gesture.csv")    -->
-<!-- head(ges) -->
-<!-- ``` -->
-<!-- ::: -->
-<!-- #### Step 2: Descriptive statistics and distributions -->
-<!-- As part of the pre-lab activities, you've already familiarised yourself with the dataset by looking at: -->
-<!-- * how participants were distributed across the pinkie curl conditions; -->
-<!-- * which response option was chosen more frequently in total and across pinkie curl conditions; -->
-<!-- * proportions of response options across pinkie curl conditions -->
-<!-- > **TASK:** Please remind yourself of these stages if necessary by revisiting the [**`chaper12_6.R` script**](data/week14/chapter12_6.R). -->
-<!-- #### Step 3: Data wrangling -->
-<!-- For logistic regression, the outcome variable needs to either be coded as 0 or 1, or it needs to be coded as a factor. -->
-<!-- > **TASK:** Write the code to convert the outcome variable to a factor. -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Hint -->
-<!-- Use `mutate()` and `factor()`. -->
-<!-- ::: -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Code -->
-<!-- ``` -->
-<!-- ges <- mutate(ges, choice = factor(choice)) -->
-<!-- ``` -->
-<!-- ::: -->
-<!-- As with linear regression, centering your predictor makes it easier to interpret the output of a logistic regression. -->
-<!-- > **TASK:** Write the code to center the pinkie curl predictor. -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Hint -->
-<!-- *Centering* involves subtracting the mean. -->
-<!-- ::: -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Code -->
-<!-- ``` -->
-<!-- ges <- mutate(ges, -->
-<!--    pinkie_c = pinkie_curl - mean(pinkie_curl)) -->
-<!-- ``` -->
-<!-- ::: -->
-<!-- #### Step 5: Fit the regression model with the centered variable -->
-<!-- Now let's re-fit choice (height vs. shape) as a function of pinkie curl, but using the centered variable. -->
-<!-- > **TASK:** Write the code to fit the model and check the coefficients. -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Hint -->
-<!-- Use the `glm()` function and remember you need to specify the 'family' argument. To check the coefficients, you can use the `tidy()` function. -->
-<!-- ::: -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Code -->
-<!-- ``` -->
-<!-- ges_mdl_c <- glm(choice ~ pinkie_c, -->
-<!--                data = ges, family = 'binomial') -->
-<!-- tidy(ges_mdl_c) -->
-<!-- ``` -->
-
-<!-- **QUESTION 1**:  How does the coefficient table differ from the model fitted earlier where you used the pinkie curl predictor before you centered it? -->
-<!-- **QUESTION 2**: How should you now (using the model with the centered pinkie curl predictor) interpret the intercept? -->
-
-<!-- The average pinkie curl is step 5 on the 9 step continuum. From our previous analysis (pre-lab activity), we know that the predicted log odds of 'shape' at that step was 0.38 and the probability was 0.59. So if we extract the intercept from the coefficient table of the model using the centered predictor, we should get those values. Use the code below to do so and compare the values to the ones from the pre-lab activity. -->
-<!-- ```{r eval=FALSE} -->
-<!-- # Extracting the estimate for the intercept and storing it in an object called intercept: -->
-<!-- intercept_logOdds <- tidy(ges_mdl_c)$estimate[1] -->
-<!-- # Getting the predicted probability by applying the logistic: -->
-<!-- intercept_prob <- plogis(intercept_logOdds) -->
-<!-- intercept_logOdds -->
-<!-- intercept_prob -->
-<!-- ``` -->
-<!-- The values are roughly the same!  -->
-<!-- #### Step 6:  Incorporating a second predictor -->
-<!-- In addition to the 'pinkie curl', the extent to which the index finger is curved may also affect gesture perception. This is quantified in the 'index_curve' variable. Before we fit the model, we need to center both predictors. -->
-<!-- >**TASK:** Write the code to center the second predictor. -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Hint -->
-<!-- *Centering* involves subtracting the mean. -->
-<!-- ::: -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Code -->
-<!-- ``` -->
-<!-- ges <- mutate(ges, -->
-<!--               index_c = index_curve - mean(index_curve)) -->
-<!-- ``` -->
-<!-- ::: -->
-<!-- > **TASK:** Write the code to fit model with both pinkie curl and index curve and check the coefficients. -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Hint -->
-<!-- Use the `glm()` function and remember you need to specify the 'family' argument. To check the coefficients, you can use the `tidy()` function. -->
-<!-- ::: -->
-<!-- :::{.callout-tip collapse="true"} -->
-<!-- ## Code -->
-<!-- ``` -->
-<!-- both_mdl <- glm(choice ~ pinkie_c + index_c, -->
-<!--    data = ges, family = 'binomial') -->
-<!-- tidy(both_mdl) -->
-<!-- ``` -->
-<!-- **QUESTION 3:** How does the index_curve predictor affect the proportion of shape responses? -->
-<!-- We can see this more easily if we compare the descriptive proportions: -->
-<!-- ```{r eval=FALSE} -->
-
-<!-- index_tab <- with(ges, table(index_curve, choice)) -->
-<!-- index_tab -->
-
-<!-- prop.table(index_tab, 1) -->
-<!-- ``` -->
-<!-- The "1" in here stands for row-wise proportions."2" would compute column-wise proportions. -->
+<section id="lab-activity-1-more-work-on-gesture-perception" class="level3">
+<h3 class="anchored" data-anchor-id="lab-activity-1-more-work-on-gesture-perception">Lab activity 1: More work on gesture perception</h3>
+<section id="background" class="level4">
+<h4 class="anchored" data-anchor-id="background">Background</h4>
+<p>The dataset we’ll be working with is described in section 12.6 of the chapter on logistic regression in Bodo Winter’s book (link under ‘Reading’). In the pre-lab activity, we explored the dataset and fitted a first logistic regression model assessing whether participants’ perception of a gesture (expressed as a categorical decision between a ‘shape’ vs.&nbsp;a ‘height’ interpretation of the gesture) was affected by the extent of ‘pinkie curl’. In this lab activity, we’ll be building on that analysis by: 1) Repeating the analysis with a centered pinkie curl variable, and 2) by adding a second predictor: index_curve.</p>
+<p>Our research question: Is gesture perception associated with different aspects of hand shape?</p>
+</section>
+<section id="step-1-set-up" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-set-up">Step 1: Set up</h4>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Set your working directory
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The folder you were asked to download under ‘Pre-lab activity 3: Getting ready for the lab class’ contains the data files we’ll need. Make sure you have set your working directory to this folder by right-clicking on it and selecting ‘Set as working directory’.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Empty the R environment
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before you do anything else, when starting a new analysis, it is a good idea to empty the R environment. This prevents objects and variables from previous analyses interfering with the current one. To do this, you can click on the little broom icon in the top right of the Environment pane, or you can use <code>rm(list=ls())</code>.</p>
+</div>
+</div>
+<p>Before we can get started we need to tell R which libraries to use. For this analysis we’ll need <code>broom</code> and <code>tidyverse</code>.</p>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Load the relevant libraries. If you are unsure how to do that, you can look at the ‘Hint’ below for a clue by expanding it. After that, if you are still unsure, you can view the code by expanding the ‘Code’ section below.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>library()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below.</p>
+<pre><code>library(broom)
+library(tidyverse)</code></pre>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+If you couldn’t upload files to the server, do this:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you experienced difficulties with uploading a folder or a file to the server, you can use the code below to directly download the file you need in this lab activity to the server (instead of first downloading it to you computer and then uploading it to the server). Remember that you can copy the code to your clipboard by clicking on the ‘clipboard’ in the top right corner.</p>
+</div>
+</div>
+<div class="cell" data-hash="Week14_cache/html/unnamed-chunk-1_cb6c5bcaa581ce87ba9b6b1566326ebc">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">download.file</span>(<span class="st">"https://github.com/mg78/2324_PSYC402/blob/main/data/week14/hassemer_winter_2016_gesture.csv?raw=true"</span>, <span class="at">destfile =</span> <span class="st">"hassemer_winter_2016_gesture.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK</strong>: Finally, read in the data file (<code>hassemer_winter_2016_gesture.csv</code>), and familiarise yourself with its structure.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>read_csv()</code> function and the <code>head()</code> function.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code to do this is below.</p>
+<pre><code>ges &lt;- read_csv("hassemer_winter_2016_gesture.csv")
+head(ges)</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-descriptive-statistics-and-distributions" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-descriptive-statistics-and-distributions">Step 2: Descriptive statistics and distributions</h4>
+<p>As part of the pre-lab activities, you’ve already familiarised yourself with the dataset by looking at:</p>
+<ul>
+<li>how participants were distributed across the pinkie curl conditions;</li>
+<li>which response option was chosen more frequently in total and across pinkie curl conditions;</li>
+<li>proportions of response options across pinkie curl conditions</li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>TASK:</strong> Please remind yourself of these stages if necessary by revisiting the <a href="data/week14/chapter12_6.R"><strong><code>chaper12_6.R</code> script</strong></a>.</p>
+</blockquote>
+</section>
+<section id="step-3-data-wrangling" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-data-wrangling">Step 3: Data wrangling</h4>
+<p>For logistic regression, the outcome variable needs to either be coded as 0 or 1, or it needs to be coded as a factor.</p>
+<blockquote class="blockquote">
+<p><strong>TASK:</strong> Write the code to convert the outcome variable to a factor.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use <code>mutate()</code> and <code>factor()</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>ges &lt;- mutate(ges, choice = factor(choice))</code></pre>
+</div>
+</div>
+</div>
+<p>As with linear regression, centering your predictor makes it easier to interpret the output of a logistic regression.</p>
+<blockquote class="blockquote">
+<p><strong>TASK:</strong> Write the code to center the pinkie curl predictor.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Centering</em> involves subtracting the mean.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>ges &lt;- mutate(ges,
+    pinkie_c = pinkie_curl - mean(pinkie_curl))</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="step-5-fit-the-regression-model-with-the-centered-variable" class="level4">
+<h4 class="anchored" data-anchor-id="step-5-fit-the-regression-model-with-the-centered-variable">Step 5: Fit the regression model with the centered variable</h4>
+<p>Now let’s re-fit choice (height vs.&nbsp;shape) as a function of pinkie curl, but using the centered variable.</p>
+<blockquote class="blockquote">
+<p><strong>TASK:</strong> Write the code to fit the model and check the coefficients.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>glm()</code> function and remember you need to specify the ‘family’ argument. To check the coefficients, you can use the <code>tidy()</code> function.</p>
+</div>
+</div>
+</div>
+<p>:::{.callout-tip collapse=“true”} ## Code</p>
+<pre><code>ges_mdl_c &lt;- glm(choice ~ pinkie_c,
+               data = ges, family = 'binomial')
+tidy(ges_mdl_c)</code></pre>
+<p><strong>QUESTION 1</strong>: How does the coefficient table differ from the model fitted earlier where you used the pinkie curl predictor before you centered it?</p>
+<p><strong>QUESTION 2</strong>: How should you now (using the model with the centered pinkie curl predictor) interpret the intercept?</p>
+<p>The average pinkie curl is step 5 on the 9 step continuum. From our previous analysis (pre-lab activity), we know that the predicted log odds of ‘shape’ at that step was 0.38 and the probability was 0.59. So if we extract the intercept from the coefficient table of the model using the centered predictor, we should get those values. Use the code below to do so and compare the values to the ones from the pre-lab activity.</p>
+<div class="cell" data-hash="Week14_cache/html/unnamed-chunk-2_015ff622b155394432c16771bf89961c">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extracting the estimate for the intercept and storing it in an object called intercept:</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>intercept_logOdds <span class="ot">&lt;-</span> <span class="fu">tidy</span>(ges_mdl_c)<span class="sc">$</span>estimate[<span class="dv">1</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Getting the predicted probability by applying the logistic:</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>intercept_prob <span class="ot">&lt;-</span> <span class="fu">plogis</span>(intercept_logOdds)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>intercept_logOdds</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>intercept_prob</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The values are roughly the same!</p>
+</section>
+<section id="step-6-incorporating-a-second-predictor" class="level4">
+<h4 class="anchored" data-anchor-id="step-6-incorporating-a-second-predictor">Step 6: Incorporating a second predictor</h4>
+<p>In addition to the ‘pinkie curl’, the extent to which the index finger is curved may also affect gesture perception. This is quantified in the ‘index_curve’ variable. Before we fit the model, we need to center both predictors.</p>
+<blockquote class="blockquote">
+<p><strong>TASK:</strong> Write the code to center the second predictor.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><em>Centering</em> involves subtracting the mean.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre><code>ges &lt;- mutate(ges,
+              index_c = index_curve - mean(index_curve))</code></pre>
+</div>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>TASK:</strong> Write the code to fit model with both pinkie curl and index curve and check the coefficients.</p>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hint
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Use the <code>glm()</code> function and remember you need to specify the ‘family’ argument. To check the coefficients, you can use the <code>tidy()</code> function.</p>
+</div>
+</div>
+</div>
+<p>:::{.callout-tip collapse=“true”} ## Code</p>
+<pre><code>both_mdl &lt;- glm(choice ~ pinkie_c + index_c,
+    data = ges, family = 'binomial')
+tidy(both_mdl)</code></pre>
+<p><strong>QUESTION 3:</strong> How does the index_curve predictor affect the proportion of shape responses?</p>
+<p>We can see this more easily if we compare the descriptive proportions:</p>
+<div class="cell" data-hash="Week14_cache/html/unnamed-chunk-3_b7900e78c5998b07416ccaf6aec83266">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>index_tab <span class="ot">&lt;-</span> <span class="fu">with</span>(ges, <span class="fu">table</span>(index_curve, choice))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>index_tab</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>(index_tab, <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The “1” in here stands for row-wise proportions.”2” would compute column-wise proportions.</p>
+</section>
+</section>
 </section>
 <section id="sec-wk14-answers" class="level2">
 <h2 class="anchored" data-anchor-id="sec-wk14-answers">Answers</h2>
