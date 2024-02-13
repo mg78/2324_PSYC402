@@ -54,7 +54,7 @@ If you get error messages when attempting to upload a file or a folder with file
 Try running the code mentioned in the online textbook by Barr. If you find it easier, use the **`rainy_days.R` script** (in the '402_week14_forStudents folder you were asked to download in 'Pre-lab activity 1'). It illustrates the point that for discrete data, the variance is often not independent from the mean. In addition, it introduces some very useful R functions: What do the `rep()` function, the `c()` function and the `facet_wrap()` function do? Remember, you can type `?function name()` (e.g., `?rep()`) in the Console to get more information about a function.
 Finally, can you add a graph for rainy days in Lancaster?
 
-### Pre-lab activity 3:Gesture perception
+### Pre-lab activity 3: Gesture perception
 Please go through the example described in section 12.6 of the chapter on logistic regression in Bodo Winter’s book (link under ‘Reading’). Read the section and (simultaneously) work through the script (`chapter12_6.R`; in the '402_week14_forStudents folder you were asked to download in 'Pre-lab activity 1'). We’ll be working more with this dataset during the lab, so it is helpful if you get a feel for it now.
 
 ## Lab activities  {#sec-wk14-lab-activities}
@@ -196,6 +196,7 @@ ges_mdl_c <- glm(choice ~ pinkie_c,
                data = ges, family = 'binomial')
 tidy(ges_mdl_c)
 ```
+:::
 
 **QUESTION 1**:  How does the coefficient table differ from the model fitted earlier where you used the pinkie curl predictor before you centered it?
 

@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#pre-lab-activity-1-getting-ready" id="toc-pre-lab-activity-1-getting-ready" class="nav-link" data-scroll-target="#pre-lab-activity-1-getting-ready">Pre-lab activity 1: Getting ready</a></li>
   <li><a href="#pre-lab-activity-2-rainy-days" id="toc-pre-lab-activity-2-rainy-days" class="nav-link" data-scroll-target="#pre-lab-activity-2-rainy-days">Pre-lab activity 2: Rainy days</a></li>
-  <li><a href="#pre-lab-activity-3gesture-perception" id="toc-pre-lab-activity-3gesture-perception" class="nav-link" data-scroll-target="#pre-lab-activity-3gesture-perception">Pre-lab activity 3:Gesture perception</a></li>
+  <li><a href="#pre-lab-activity-3-gesture-perception" id="toc-pre-lab-activity-3-gesture-perception" class="nav-link" data-scroll-target="#pre-lab-activity-3-gesture-perception">Pre-lab activity 3: Gesture perception</a></li>
   </ul></li>
   <li><a href="#sec-wk14-lab-activities" id="toc-sec-wk14-lab-activities" class="nav-link" data-scroll-target="#sec-wk14-lab-activities">Lab activities</a>
   <ul class="collapse">
@@ -306,8 +306,8 @@ If you have difficulty uploading files to the server
 <h3 class="anchored" data-anchor-id="pre-lab-activity-2-rainy-days">Pre-lab activity 2: Rainy days</h3>
 <p>Try running the code mentioned in the online textbook by Barr. If you find it easier, use the <strong><code>rainy_days.R</code> script</strong> (in the ‘402_week14_forStudents folder you were asked to download in ’Pre-lab activity 1’). It illustrates the point that for discrete data, the variance is often not independent from the mean. In addition, it introduces some very useful R functions: What do the <code>rep()</code> function, the <code>c()</code> function and the <code>facet_wrap()</code> function do? Remember, you can type <code>?function name()</code> (e.g., <code>?rep()</code>) in the Console to get more information about a function. Finally, can you add a graph for rainy days in Lancaster?</p>
 </section>
-<section id="pre-lab-activity-3gesture-perception" class="level3">
-<h3 class="anchored" data-anchor-id="pre-lab-activity-3gesture-perception">Pre-lab activity 3:Gesture perception</h3>
+<section id="pre-lab-activity-3-gesture-perception" class="level3">
+<h3 class="anchored" data-anchor-id="pre-lab-activity-3-gesture-perception">Pre-lab activity 3: Gesture perception</h3>
 <p>Please go through the example described in section 12.6 of the chapter on logistic regression in Bodo Winter’s book (link under ‘Reading’). Read the section and (simultaneously) work through the script (<code>chapter12_6.R</code>; in the ‘402_week14_forStudents folder you were asked to download in ’Pre-lab activity 1’). We’ll be working more with this dataset during the lab, so it is helpful if you get a feel for it now.</p>
 </section>
 </section>
@@ -558,10 +558,24 @@ Hint
 </div>
 </div>
 </div>
-<p>:::{.callout-tip collapse=“true”} ## Code</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Code
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <pre><code>ges_mdl_c &lt;- glm(choice ~ pinkie_c,
                data = ges, family = 'binomial')
 tidy(ges_mdl_c)</code></pre>
+</div>
+</div>
+</div>
 <p><strong>QUESTION 1</strong>: How does the coefficient table differ from the model fitted earlier where you used the pinkie curl predictor before you centered it?</p>
 <p><strong>QUESTION 2</strong>: How should you now (using the model with the centered pinkie curl predictor) interpret the intercept?</p>
 <p>The average pinkie curl is step 5 on the 9 step continuum. From our previous analysis (pre-lab activity), we know that the predicted log odds of ‘shape’ at that step was 0.38 and the probability was 0.59. So if we extract the intercept from the coefficient table of the model using the centered predictor, we should get those values. Use the code below to do so and compare the values to the ones from the pre-lab activity.</p>
@@ -584,7 +598,7 @@ tidy(ges_mdl_c)</code></pre>
 <p><strong>TASK:</strong> Write the code to center the second predictor.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -593,14 +607,14 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div id="callout-15" class="callout-15-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p><em>Centering</em> involves subtracting the mean.</p>
 </div>
 </div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-15-contents" aria-controls="callout-15" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -609,7 +623,7 @@ Code
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-15" class="callout-15-contents callout-collapse collapse">
+<div id="callout-16" class="callout-16-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <pre><code>ges &lt;- mutate(ges,
               index_c = index_curve - mean(index_curve))</code></pre>
@@ -620,7 +634,7 @@ Code
 <p><strong>TASK:</strong> Write the code to fit model with both pinkie curl and index curve and check the coefficients.</p>
 </blockquote>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-16-contents" aria-controls="callout-16" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -629,7 +643,7 @@ Hint
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-16" class="callout-16-contents callout-collapse collapse">
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Use the <code>glm()</code> function and remember you need to specify the ‘family’ argument. To check the coefficients, you can use the <code>tidy()</code> function.</p>
 </div>
