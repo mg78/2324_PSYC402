@@ -500,9 +500,10 @@ Code
 </div>
 </div>
 </div>
-<p>Next, we want to select only the variables we need. We want to use the <code>select()</code> function from <code>dplyr</code>. Because the MASS library is also loaded and that library also contains a <code>select()</code> function, we need to tell R specifically to use the one from <code>dplyr</code>. You can do this by using <code>dpply::</code>, like this:</p>
-<div class="cell" data-hash="Week15_cache/html/unnamed-chunk-4_c70460a8ac511432de96172c29b1c8da">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>both <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">select</span>(Word, DominantModality<span class="sc">:</span>Smell, Log10Freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, we want to select only the variables we need. We want to use the <code>select()</code> function from <code>dplyr</code>. Because the MASS library is also loaded and that library also contains a <code>select()</code> function, we need to tell R specifically to use the one from <code>dplyr</code>. You can do this by using <code>dplyr::</code>, like this:</p>
+<div class="cell" data-hash="Week15_cache/html/unnamed-chunk-4_4f016caa233523b0674c413d8d71bd22">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>both <span class="ot">&lt;-</span> both <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Word, DominantModality<span class="sc">:</span>Smell, Log10Freq)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
 <p><strong>TASK</strong>: Add the code above to your script and run it.</p>

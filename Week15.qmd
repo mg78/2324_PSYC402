@@ -171,10 +171,11 @@ both <- left_join(x = lyn, y = ELP, by = 'Word')
 ```
 :::
 
-Next, we want to select only the variables we need. We want to use the `select()` function from `dplyr`. Because the MASS library is also loaded and that library also contains a `select()` function, we need to tell R specifically to use the one from `dplyr`. You can do this by using `dpply::`, like this:
+Next, we want to select only the variables we need. We want to use the `select()` function from `dplyr`. Because the MASS library is also loaded and that library also contains a `select()` function, we need to tell R specifically to use the one from `dplyr`. You can do this by using `dplyr::`, like this:
 
 ```{r eval=FALSE}
-both <- dplyr::select(Word, DominantModality:Smell, Log10Freq)
+both <- both %>%
+  dplyr::select(Word, DominantModality:Smell, Log10Freq)
 ```
 
 > **TASK**: Add the code above to your script and run it.
